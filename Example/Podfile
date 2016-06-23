@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'BSSelectableView_Example' do
+  pod 'BSSelectableView', :path => '../'
+
+  target 'BSSelectableView_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

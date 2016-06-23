@@ -1,0 +1,19 @@
+PODS:
+  - BSSelectableView (0.1.0):
+    - ZFTokenField
+  - ZFTokenField (0.0.1)
+
+DEPENDENCIES:
+  - BSSelectableView (from `../`)
+
+EXTERNAL SOURCES:
+  BSSelectableView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  BSSelectableView: 3a1ce69d94bbf346d17ea7cbf71df9dea0eb38c9
+  ZFTokenField: 3e3ed288e32e085bb8f9c38b4eeb3806711b475a
+
+PODFILE CHECKSUM: d7e170fa3d01716f334a3b9cfaf06c6495346f75
+
+COCOAPODS: 1.0.1
