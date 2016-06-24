@@ -18,12 +18,6 @@ class ViewController: UIViewController, BSSelectableViewDelegate {
         multiselectableView.delegate = self
     }
     
-    @IBAction func toggleTapped(sender: UIButton) {
-        
-        selectableView.hideOptions()
-        multiselectableView.hideOptions()
-    }
-    
     func selectableOptionsForSelectableViewWithIdentifier(identifier: String) -> [BSSelectableOption] {
         
         return [

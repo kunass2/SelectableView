@@ -1,24 +1,65 @@
 //
-//  AppDelegate.swift
+//  BSSelectableView.swift
 //  BSSelectableView
 //
 //  Created by Bartłomiej Semańczyk on 06/22/2016.
 //  Copyright (c) 2016 Bartłomiej Semańczyk. All rights reserved.
 //
 
-@IBDesignable public class BSSelectableView: BSView, UITableViewDataSource, UITableViewDelegate {
+public class BSSelectableOption: NSObject {
     
-    @IBOutlet public var textField: UITextField!
+    public var identifier = 0
+    public var title = ""
     
-    public var selectedOption: BSSelectableOption? {
+    public init(identifier: Int, title: String) {
+        
+        self.identifier = identifier
+        self.title = title
+    }
+}
+
+@objc public protocol BSSelectableViewDelegate {
+    
+    func selectableOptionsForSelectableViewWithIdentifier(identifier: String) -> [BSSelectableOption]
+    optional func singleSelectableView(view: BSSingleSelectableView, didSelectOption option: BSSelectableOption)
+    optional func multiSelectableView(view: BSMultiSelectableView, didSelectOption option: BSSelectableOption)
+    optional func multiSelectableView(view: BSMultiSelectableView, didRemoveOption option: BSSelectableOption)
+    optional func multiSelectableView(view: BSMultiSelectableView, tokenViewForOption option: BSSelectableOption, atIndex index: Int) -> UIView
+}
+
+let BSSelectableTableViewCellIdentifier = "SelectableTableViewCellIdentifier"
+
+public class BSSelectableView: UIView {
+    
+    static var tintColorOfSelectedOption = UIColor.blueColor()
+    
+    @IBInspectable public var identifier: String = ""
+    @IBInspectable public var maxNumberOfRows: Int = 6
+    @IBInspectable public var cornerRadius: CGFloat = 3 {
         
         didSet {
             
-            textField.text = selectedOption?.title
-            expanded = !expanded
+            layer.cornerRadius = cornerRadius
+            layer.masksToBounds = true
         }
     }
-
+    
+    @IBOutlet public var contentOptionsHeightConstraint: NSLayoutConstraint!
+    @IBOutlet public var contentOptionsView: UIView!
+    
+    weak public var delegate: BSSelectableViewDelegate?
+    
+    public var options: [BSSelectableOption]?
+    
+    var tableView = UITableView()
+    var expanded = false {
+        
+        didSet {
+            updateContentOptionsHeight()
+        }
+    }
+    
+    private var optionsFetched = false
     
     //MARK: - Class Methods
     
@@ -28,46 +69,57 @@
     
     //MARK: - Actions
     
-    @IBAction public func switchButtonTapped(sender: UIButton) {
-        
-        setupViewAndDataSourceIfNeeded()
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        expanded = !expanded
-        tableView.reloadData()
-    }
-    
     //MARK: - Public
     
+    public func hideOptions() {
+        expanded = false
+    }
+    
+    public func updateView() {
+        
+        sortOptions()
+        tableView.reloadData()
+        updateContentOptionsHeight()
+    }
+    
     //MARK: - Internal
+    
+    func updateContentOptionsHeight() {
+        contentOptionsHeightConstraint.constant = expanded ? CGFloat(min((options?.count ?? 0) * 40, maxNumberOfRows*40)) : 0
+    }
+    
+    func setupViewAndDataSourceIfNeeded() {
+        
+        if !optionsFetched {
+            
+            tableView.translatesAutoresizingMaskIntoConstraints = false
+            tableView.bounces = false
+            tableView.rowHeight = 40
+            
+            let nib = UINib(nibName: "BSSelectableTableViewCell", bundle: NSBundle(forClass: BSSelectableTableViewCell.classForCoder()))
+            tableView.registerNib(nib, forCellReuseIdentifier: BSSelectableTableViewCellIdentifier)
+            
+            contentOptionsView.addSubview(tableView)
+            
+            let topConstraint = NSLayoutConstraint(item: tableView, attribute: .Top, relatedBy: .Equal, toItem: contentOptionsView, attribute: .Top, multiplier: 1, constant: 0)
+            let trailingConstraint = NSLayoutConstraint(item: tableView, attribute: .Trailing, relatedBy: .Equal, toItem: contentOptionsView, attribute: .Trailing, multiplier: 1, constant: 0)
+            let bottomConstraint = NSLayoutConstraint(item: tableView, attribute: .Bottom, relatedBy: .Equal, toItem: contentOptionsView, attribute: .Bottom, multiplier: 1, constant: 0)
+            let leadingConstraint = NSLayoutConstraint(item: tableView, attribute: .Leading, relatedBy: .Equal, toItem: contentOptionsView, attribute: .Leading, multiplier: 1, constant: 0)
+            
+            contentOptionsView.addConstraints([topConstraint, trailingConstraint, bottomConstraint, leadingConstraint])
+            contentOptionsView.layoutIfNeeded()
+            
+            options = delegate?.selectableOptionsForSelectableViewWithIdentifier(identifier)
+            sortOptions()
+            optionsFetched = true
+        }
+    }
+    
+    func sortOptions() {
+        options?.sortInPlace { $0.title.lowercaseString <= $1.title.lowercaseString }
+    }
     
     //MARK: - Private
     
     //MARK: - Overridden
-    
-    //MARK: - UITableViewDataSource
-    
-    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return options?.count ?? 0
-    }
-    
-    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCellWithIdentifier(BSSelectableTableViewCellIdentifier, forIndexPath: indexPath) as! BSSelectableTableViewCell
-        let option = options?[indexPath.row]
-        
-        cell.titleLabel.text = option?.title
-        cell.accessoryType = option?.identifier == selectedOption?.identifier ? .Checkmark : .None
-        
-        return cell
-    }
-    
-    //MARK: - UITableViewDelegate
-    
-    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        selectedOption = options?[indexPath.row]
-        delegate?.selectableView?(self, didSelectOption: selectedOption!)
-    }
 }

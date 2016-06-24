@@ -25,7 +25,7 @@
                         <constraint firstAttribute="width" secondItem="tAS-Zo-n4R" secondAttribute="height" multiplier="1:1" id="qRB-B9-OLk"/>
                     </constraints>
                     <color key="tintColor" red="0.58039215690000001" green="0.71372549019999998" blue="0.043137254899999998" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" image="icon-close"/>
+                    <state key="normal" title="x"/>
                     <connections>
                         <action selector="removeButtonTapped:" destination="74C-st-iYh" eventType="touchUpInside" id="ZDx-Rm-1yt"/>
                     </connections>
@@ -54,7 +54,4 @@
             <point key="canvasLocation" x="380" y="322"/>
         </view>
     </objects>
-    <resources>
-        <image name="icon-close" width="10" height="12"/>
-    </resources>
 </document>

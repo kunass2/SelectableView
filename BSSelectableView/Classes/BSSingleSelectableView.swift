@@ -1,15 +1,23 @@
 //
-//  BSMultiSelectableView.swift
+//  BSSingleSelectableView.swift
 //  BSSelectableView
 //
 //  Created by Bartłomiej Semańczyk on 06/22/2016.
 //  Copyright (c) 2016 Bartłomiej Semańczyk. All rights reserved.
 //
 
-@IBDesignable public class BSMultiSelectableView: BSSelectableView, UITableViewDataSource, UITableViewDelegate, BSTokenViewDataSource {
+@IBDesignable public class BSSingleSelectableView: BSSelectableView, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet public var tokenField: BSTokenView!
-    public var selectedOptions = [BSSelectableOption]()
+    @IBOutlet public var textField: UITextField!
+    
+    public var selectedOption: BSSelectableOption? {
+        
+        didSet {
+            
+            textField.text = selectedOption?.title
+            expanded = !expanded
+        }
+    }
     
     //MARK: - Class Methods
     
@@ -25,20 +33,11 @@
         tableView.delegate = self
         tableView.dataSource = self
         
-        tokenField.dataSource = self
-        
         expanded = !expanded
         tableView.reloadData()
     }
     
     //MARK: - Public
-    
-    public override func updateView() {
-        
-        selectedOptions.sortInPlace { $0.title.lowercaseString <= $1.title.lowercaseString }
-        tokenField.reloadData()
-        super.updateView()
-    }
     
     //MARK: - Internal
     
@@ -58,7 +57,7 @@
         let option = options?[indexPath.row]
         
         cell.titleLabel.text = option?.title
-        cell.accessoryType = .None
+        cell.accessoryType = option?.identifier == selectedOption?.identifier ? .Checkmark : .None
         cell.tintColor = BSSelectableView.tintColorOfSelectedOption
         
         return cell
@@ -68,28 +67,7 @@
     
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if let selectedOption = options?[indexPath.row] {
-            
-            options?.removeAtIndex(indexPath.row)
-            selectedOptions.append(selectedOption)
-            
-            updateView()
-            
-            delegate?.multiSelectableView?(self, didSelectOption: selectedOption)
-        }
-    }
-    
-    //MARK: - ZFTokenFieldDataSource
-    
-    func lineHeightForTokenInField(tokenField: BSTokenView) -> CGFloat {
-        return 30
-    }
-    
-    func numberOfTokenInField(tokenField: BSTokenView) -> Int {
-        return selectedOptions.count
-    }
-    
-    func tokenField(tokenField: BSTokenView, viewForTokenAtIndex index: Int) -> UIView? {
-        return delegate?.multiSelectableView?(self, tokenViewForOption: selectedOptions[index], atIndex: index)
+        selectedOption = options?[indexPath.row]
+        delegate?.singleSelectableView?(self, didSelectOption: selectedOption!)
     }
 }

@@ -34,6 +34,7 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
+            <color key="tintColor" red="0.58039215690000001" green="0.71372549019999998" blue="0.043137254899999998" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="titleLabel" destination="wNy-wa-Wng" id="6MP-uR-hZZ"/>
             </connections>
