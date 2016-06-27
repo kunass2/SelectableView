@@ -100,6 +100,8 @@ public class BSSelectableView: UIView {
             tableView.translatesAutoresizingMaskIntoConstraints = false
             tableView.bounces = false
             tableView.rowHeight = 40
+            tableView.separatorInset = UIEdgeInsetsZero
+            tableView.layoutMargins = UIEdgeInsetsZero
             
             let nib = UINib(nibName: "BSSelectableTableViewCell", bundle: NSBundle(forClass: BSSelectableTableViewCell.classForCoder()))
             tableView.registerNib(nib, forCellReuseIdentifier: BSSelectableTableViewCellIdentifier)

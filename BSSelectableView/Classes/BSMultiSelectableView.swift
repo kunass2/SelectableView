@@ -62,6 +62,7 @@
         cell.tintColor = BSSelectableView.tintColorForSelectedOption
         cell.titleLabel.font = BSSelectableView.fontForOption
         cell.titleLabel.textColor = BSSelectableView.titleColorForOption
+        cell.layoutMargins = UIEdgeInsetsZero
         
         return cell
     }

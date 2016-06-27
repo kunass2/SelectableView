@@ -60,7 +60,8 @@
         cell.accessoryType = option?.identifier == selectedOption?.identifier ? .Checkmark : .None
         cell.tintColor = BSSelectableView.tintColorForSelectedOption
         cell.titleLabel.font = BSSelectableView.fontForOption
-        cell.titleLabel.textColor = option?.identifier == selectedOption?.identifier ? BSSelectableView.tintColorForSelectedOption : BSSelectableView.titleColorForOption
+        cell.titleLabel.textColor = option?.identifier == selectedOption?.identifier ? BSSelectableView.titleColorForSelectedOption : BSSelectableView.titleColorForOption
+        cell.layoutMargins = UIEdgeInsetsZero
         
         return cell
     }
