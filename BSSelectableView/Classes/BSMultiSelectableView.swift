@@ -59,9 +59,15 @@
         
         cell.titleLabel.text = option?.title
         cell.accessoryType = .None
-        cell.tintColor = BSSelectableView.tintColorOfSelectedOption
+        cell.tintColor = BSSelectableView.tintColorForSelectedOption
+        cell.titleLabel.font = BSSelectableView.fontForOption
+        cell.titleLabel.textColor = BSSelectableView.titleColorForOption
         
         return cell
+    }
+    
+    public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return CGFloat(BSSelectableView.heightForOption)
     }
     
     //MARK: - UITableViewDelegate
@@ -82,7 +88,7 @@
     //MARK: - ZFTokenFieldDataSource
     
     func lineHeightForTokenInField(tokenField: BSTokenView) -> CGFloat {
-        return 30
+        return delegate?.lineHeightForTokenInMultiSelectableView?() ?? 30
     }
     
     func numberOfTokenInField(tokenField: BSTokenView) -> Int {

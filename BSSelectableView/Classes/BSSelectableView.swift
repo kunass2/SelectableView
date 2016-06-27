@@ -25,13 +25,18 @@ public class BSSelectableOption: NSObject {
     optional func multiSelectableView(view: BSMultiSelectableView, didSelectOption option: BSSelectableOption)
     optional func multiSelectableView(view: BSMultiSelectableView, didRemoveOption option: BSSelectableOption)
     optional func multiSelectableView(view: BSMultiSelectableView, tokenViewForOption option: BSSelectableOption, atIndex index: Int) -> UIView
+    optional func lineHeightForTokenInMultiSelectableView() -> CGFloat
 }
 
 let BSSelectableTableViewCellIdentifier = "SelectableTableViewCellIdentifier"
 
 public class BSSelectableView: UIView {
     
-    static var tintColorOfSelectedOption = UIColor.blueColor()
+    static public var tintColorForSelectedOption = UIColor.blueColor()
+    static public var titleColorForSelectedOption = UIColor.greenColor()
+    static public var titleColorForOption = UIColor.blackColor()
+    static public var fontForOption = UIFont.systemFontOfSize(16)
+    static public var heightForOption = 40
     
     @IBInspectable public var identifier: String = ""
     @IBInspectable public var maxNumberOfRows: Int = 6
@@ -85,7 +90,7 @@ public class BSSelectableView: UIView {
     //MARK: - Internal
     
     func updateContentOptionsHeight() {
-        contentOptionsHeightConstraint.constant = expanded ? CGFloat(min((options?.count ?? 0) * 40, maxNumberOfRows*40)) : 0
+        contentOptionsHeightConstraint.constant = expanded ? CGFloat(min((options?.count ?? 0) * BSSelectableView.heightForOption, maxNumberOfRows * BSSelectableView.heightForOption)) : 0
     }
     
     func setupViewAndDataSourceIfNeeded() {

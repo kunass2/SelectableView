@@ -68,6 +68,7 @@ multiselectableView.delegate = self
     optional func multiSelectableView(view: BSMultiSelectableView, didSelectOption option: BSSelectableOption)
     optional func multiSelectableView(view: BSMultiSelectableView, didRemoveOption option: BSSelectableOption)
     optional func multiSelectableView(view: BSMultiSelectableView, tokenViewForOption option: BSSelectableOption, atIndex index: Int) -> UIView
+    optional func lineHeightForTokenInMultiSelectableView() -> CGFloat //default is 30
 }
 ```
 
@@ -82,7 +83,11 @@ multiselectableView.delegate = self
 #### You may also do some customizing:
 
 ```Swift
-BSSelectableView.tintColorOfSelectedOption = UIColor.redColor() //default is .blueColor()
+	BSSelectableView.tintColorForSelectedOption = UIColor.blueColor()
+    static public var titleColorForSelectedOption = UIColor.greenColor()
+    static public var titleColorForOption = UIColor.blackColor()
+    static public var fontForOption = UIFont.systemFontOfSize(16)
+    static public var heightForOption = 40
 ```
 
 #### If you need you are able to call public instance methods:

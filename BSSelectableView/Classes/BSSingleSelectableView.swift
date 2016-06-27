@@ -58,9 +58,15 @@
         
         cell.titleLabel.text = option?.title
         cell.accessoryType = option?.identifier == selectedOption?.identifier ? .Checkmark : .None
-        cell.tintColor = BSSelectableView.tintColorOfSelectedOption
+        cell.tintColor = BSSelectableView.tintColorForSelectedOption
+        cell.titleLabel.font = BSSelectableView.fontForOption
+        cell.titleLabel.textColor = option?.identifier == selectedOption?.identifier ? BSSelectableView.tintColorForSelectedOption : BSSelectableView.titleColorForOption
         
         return cell
+    }
+    
+    public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return CGFloat(BSSelectableView.heightForOption)
     }
     
     //MARK: - UITableViewDelegate
