@@ -125,7 +125,7 @@ public class BSSelectableView: UIView {
     }
     
     func sortOptions() {
-        options?.sortInPlace { $0.title.lowercaseString <= $1.title.lowercaseString }
+        options?.sortInPlace { $0.identifier <= $1.identifier }
     }
     
     //MARK: - Private
