@@ -14,6 +14,8 @@ class ViewController: UIViewController, BSSelectableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        BSSelectableView.titleColorForSelectedOption = UIColor.redColor()
+        
         selectableView.delegate = self
         multiselectableView.delegate = self
     }

@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name             = 'BSSelectableView'
-  s.version          = '0.5'
+  s.version          = '0.6'
   s.summary          = 'Easily manage your token along with your single or multiply select view.'
   s.description      = "Looking for simple Swift library to manage multiply or single selection? This one is for you:)"
 

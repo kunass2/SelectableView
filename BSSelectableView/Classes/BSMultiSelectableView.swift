@@ -8,7 +8,7 @@
 
 @IBDesignable public class BSMultiSelectableView: BSSelectableView, UITableViewDataSource, UITableViewDelegate, BSTokenViewDataSource {
     
-    @IBOutlet public var tokenField: BSTokenView!
+    @IBOutlet public var tokenView: BSTokenView!
     public var selectedOptions = [BSSelectableOption]()
     
     //MARK: - Class Methods
@@ -25,7 +25,7 @@
         tableView.delegate = self
         tableView.dataSource = self
         
-        tokenField.dataSource = self
+        tokenView.dataSource = self
         
         expanded = !expanded
         tableView.reloadData()
@@ -36,7 +36,7 @@
     public override func updateView() {
         
         selectedOptions.sortInPlace { $0.title.lowercaseString <= $1.title.lowercaseString }
-        tokenField.reloadData()
+        tokenView.reloadData()
         super.updateView()
     }
     
@@ -59,7 +59,6 @@
         
         cell.titleLabel.text = option?.title
         cell.accessoryType = .None
-        cell.tintColor = BSSelectableView.tintColorForSelectedOption
         cell.titleLabel.font = BSSelectableView.fontForOption
         cell.titleLabel.textColor = BSSelectableView.titleColorForOption
         cell.layoutMargins = UIEdgeInsetsZero

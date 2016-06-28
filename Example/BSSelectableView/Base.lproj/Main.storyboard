@@ -138,7 +138,7 @@
                                 <connections>
                                     <outlet property="contentOptionsHeightConstraint" destination="TlH-Ev-xjj" id="nYN-D2-m32"/>
                                     <outlet property="contentOptionsView" destination="0gL-xF-iwe" id="fjb-ru-jm2"/>
-                                    <outlet property="tokenField" destination="4UV-0G-Sjc" id="fin-SI-20d"/>
+                                    <outlet property="tokenView" destination="4UV-0G-Sjc" id="OgH-n8-qpp"/>
                                 </connections>
                             </view>
                         </subviews>

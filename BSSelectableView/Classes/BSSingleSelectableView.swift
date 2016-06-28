@@ -13,9 +13,7 @@
     public var selectedOption: BSSelectableOption? {
         
         didSet {
-            
             textField.text = selectedOption?.title
-            expanded = !expanded
         }
     }
     
@@ -75,6 +73,7 @@
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         selectedOption = options?[indexPath.row]
+        expanded = false
         delegate?.singleSelectableView?(self, didSelectOption: selectedOption!)
     }
 }

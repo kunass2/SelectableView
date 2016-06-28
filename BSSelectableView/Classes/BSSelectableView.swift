@@ -102,6 +102,7 @@ public class BSSelectableView: UIView {
             tableView.rowHeight = 40
             tableView.separatorInset = UIEdgeInsetsZero
             tableView.layoutMargins = UIEdgeInsetsZero
+            tableView.accessibilityIdentifier = identifier
             
             let nib = UINib(nibName: "BSSelectableTableViewCell", bundle: NSBundle(forClass: BSSelectableTableViewCell.classForCoder()))
             tableView.registerNib(nib, forCellReuseIdentifier: BSSelectableTableViewCellIdentifier)
