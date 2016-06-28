@@ -134,7 +134,8 @@ public class BSTokenView: UIControl {
             totalRect = CGRectUnion(itemRect, totalRect)
         }
         
-        dataSource?.tokenViewDidRefreshWithHeight(totalRect.size.height)
+        let lineHeight = dataSource?.lineHeightForTokenInField(self) ?? 30
+        dataSource?.tokenViewDidRefreshWithHeight(max(totalRect.size.height, lineHeight))
         
         return totalRect.size
     }
