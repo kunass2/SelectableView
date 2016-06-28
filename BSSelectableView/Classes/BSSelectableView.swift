@@ -55,7 +55,7 @@ public class BSSelectableView: UIView {
     
     weak public var delegate: BSSelectableViewDelegate?
     
-    public var options: [BSSelectableOption]?
+    public var options = [BSSelectableOption]()
     
     var tableView = UITableView()
     var expanded = false {
@@ -91,7 +91,13 @@ public class BSSelectableView: UIView {
     //MARK: - Internal
     
     func updateContentOptionsHeight() {
-        contentOptionsHeightConstraint.constant = expanded ? CGFloat(min((options?.count ?? 0) * BSSelectableView.heightForOption, maxNumberOfRows * BSSelectableView.heightForOption)) : 0
+        
+        print("++\(expanded)")
+        print((options.count))
+        print(maxNumberOfRows * BSSelectableView.heightForOption)
+        contentOptionsHeightConstraint.constant = expanded ? CGFloat(min((options.count) * BSSelectableView.heightForOption, maxNumberOfRows * BSSelectableView.heightForOption)) : 0
+        
+        print("-->>\(contentOptionsHeightConstraint.constant)")
     }
     
     func setupViewAndDataSourceIfNeeded() {
@@ -118,14 +124,14 @@ public class BSSelectableView: UIView {
             contentOptionsView.addConstraints([topConstraint, trailingConstraint, bottomConstraint, leadingConstraint])
             contentOptionsView.layoutIfNeeded()
             
-            options = delegate?.selectableOptionsForSelectableViewWithIdentifier(identifier)
+            options = delegate?.selectableOptionsForSelectableViewWithIdentifier(identifier) ?? []
             sortOptions()
             optionsFetched = true
         }
     }
     
     func sortOptions() {
-        options?.sortInPlace { $0.identifier <= $1.identifier }
+        options.sortInPlace { $0.identifier <= $1.identifier }
     }
     
     //MARK: - Private

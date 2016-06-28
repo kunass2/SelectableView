@@ -18,6 +18,9 @@ class ViewController: UIViewController, BSSelectableViewDelegate {
         BSSelectableView.leftPaddingForOption = 10
         selectableView.delegate = self
         multiselectableView.delegate = self
+        
+        multiselectableView.selectedOptions = [BSSelectableOption(identifier: 0, title: "First title"), BSSelectableOption(identifier: 1, title: "aaa")]
+        multiselectableView.updateView()
     }
     
     func selectableOptionsForSelectableViewWithIdentifier(identifier: String) -> [BSSelectableOption] {
@@ -50,9 +53,9 @@ class ViewController: UIViewController, BSSelectableViewDelegate {
         
         tokenView.performHandler = {
             
-            view.options?.append(option)
+//            view.options.append(option)
             view.selectedOptions.removeAtIndex(index)
-            view.updateView()
+//            view.updateView()
         }
         
         return tokenView

@@ -10,7 +10,23 @@
     
     @IBOutlet public var tokenView: BSTokenView!
     @IBOutlet public var tokenViewHeightConstraint: NSLayoutConstraint?
-    public var selectedOptions = [BSSelectableOption]()
+    public var selectedOptions = [BSSelectableOption]() {
+        
+        didSet {
+            
+            setupDataSource()
+            
+            for selectedOption in selectedOptions {
+                
+                for (index, option) in options.enumerate() {
+                    
+                    if selectedOption.identifier == option.identifier {
+                        options.removeAtIndex(index)
+                    }
+                }
+            }
+        }
+    }
     
     //MARK: - Class Methods
     
@@ -22,11 +38,7 @@
     
     @IBAction public func switchButtonTapped(sender: UIButton) {
         
-        setupViewAndDataSourceIfNeeded()
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        tokenView.dataSource = self
+        setupDataSource()
         
         expanded = !expanded
         tableView.reloadData()
@@ -36,7 +48,7 @@
     
     public override func updateView() {
         
-        selectedOptions.sortInPlace { $0.title.lowercaseString <= $1.title.lowercaseString }
+        selectedOptions.sortInPlace { $0.identifier <= $1.identifier }
         tokenView.reloadData()
         super.updateView()
     }
@@ -45,20 +57,29 @@
     
     //MARK: - Private
     
+    private func setupDataSource() {
+        
+        setupViewAndDataSourceIfNeeded()
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        tokenView.dataSource = self
+    }
+    
     //MARK: - Overridden
     
     //MARK: - UITableViewDataSource
     
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return options?.count ?? 0
+        return options.count
     }
     
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(BSSelectableTableViewCellIdentifier, forIndexPath: indexPath) as! BSSelectableTableViewCell
-        let option = options?[indexPath.row]
+        let option = options[indexPath.row]
         
-        cell.titleLabel.text = option?.title
+        cell.titleLabel.text = option.title
         cell.accessoryType = .None
         cell.titleLabel.font = BSSelectableView.fontForOption
         cell.titleLabel.textColor = BSSelectableView.titleColorForOption
@@ -76,15 +97,14 @@
     
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if let selectedOption = options?[indexPath.row] {
+        let selectedOption = options[indexPath.row]
             
-            options?.removeAtIndex(indexPath.row)
-            selectedOptions.append(selectedOption)
-            
-            updateView()
-            
-            delegate?.multiSelectableView?(self, didSelectOption: selectedOption)
-        }
+        options.removeAtIndex(indexPath.row)
+        selectedOptions.append(selectedOption)
+        
+        updateView()
+        
+        delegate?.multiSelectableView?(self, didSelectOption: selectedOption)
     }
     
     //MARK: - ZFTokenFieldDataSource
