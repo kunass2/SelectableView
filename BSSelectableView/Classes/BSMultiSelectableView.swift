@@ -9,6 +9,7 @@
 @IBDesignable public class BSMultiSelectableView: BSSelectableView, UITableViewDataSource, UITableViewDelegate, BSTokenViewDataSource {
     
     @IBOutlet public var tokenView: BSTokenView!
+    @IBOutlet public var tokenViewHeightConstraint: NSLayoutConstraint?
     public var selectedOptions = [BSSelectableOption]()
     
     //MARK: - Class Methods
@@ -98,5 +99,9 @@
     
     func tokenField(tokenField: BSTokenView, viewForTokenAtIndex index: Int) -> UIView? {
         return delegate?.multiSelectableView?(self, tokenViewForOption: selectedOptions[index], atIndex: index)
+    }
+    
+    func tokenViewDidRefreshWithHeight(height: CGFloat) {
+        tokenViewHeightConstraint?.constant = height
     }
 }

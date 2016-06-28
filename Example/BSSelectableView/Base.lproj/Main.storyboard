@@ -85,6 +85,9 @@
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4UV-0G-Sjc" customClass="BSTokenView" customModule="BSSelectableView">
                                         <rect key="frame" x="20" y="3" width="518" height="31"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="31" id="9QF-7k-qbZ"/>
+                                        </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P33-0v-Aag">
                                         <rect key="frame" x="543" y="17" width="47" height="30"/>
@@ -139,6 +142,7 @@
                                     <outlet property="contentOptionsHeightConstraint" destination="TlH-Ev-xjj" id="nYN-D2-m32"/>
                                     <outlet property="contentOptionsView" destination="0gL-xF-iwe" id="fjb-ru-jm2"/>
                                     <outlet property="tokenView" destination="4UV-0G-Sjc" id="OgH-n8-qpp"/>
+                                    <outlet property="tokenViewHeightConstraint" destination="9QF-7k-qbZ" id="B1F-Va-X3z"/>
                                 </connections>
                             </view>
                         </subviews>

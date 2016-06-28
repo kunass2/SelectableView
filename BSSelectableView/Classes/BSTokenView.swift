@@ -13,6 +13,7 @@
     func lineHeightForTokenInField(tokenField: BSTokenView) -> CGFloat
     func numberOfTokenInField(tokenField: BSTokenView) -> Int
     func tokenField(tokenField: BSTokenView, viewForTokenAtIndex index: Int) -> UIView?
+    func tokenViewDidRefreshWithHeight(height: CGFloat)
 }
 
 public class BSTokenView: UIControl {
@@ -132,6 +133,8 @@ public class BSTokenView: UIControl {
         enumerateItemRectsUsingBlock { itemRect in
             totalRect = CGRectUnion(itemRect, totalRect)
         }
+        
+        dataSource?.tokenViewDidRefreshWithHeight(totalRect.size.height)
         
         return totalRect.size
     }
