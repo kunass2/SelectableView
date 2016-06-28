@@ -15,7 +15,7 @@ class ViewController: UIViewController, BSSelectableViewDelegate {
         super.viewDidLoad()
         
         BSSelectableView.titleColorForSelectedOption = UIColor.redColor()
-        
+        BSSelectableView.leftPaddingForOption = 10
         selectableView.delegate = self
         multiselectableView.delegate = self
     }

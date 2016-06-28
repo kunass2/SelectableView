@@ -24,18 +24,13 @@
                 <constraints>
                     <constraint firstItem="wNy-wa-Wng" firstAttribute="top" secondItem="ju2-SJ-8SQ" secondAttribute="top" id="1bC-Ia-dQw"/>
                     <constraint firstAttribute="bottom" secondItem="wNy-wa-Wng" secondAttribute="bottom" id="7ue-lT-EGq"/>
-                    <constraint firstItem="wNy-wa-Wng" firstAttribute="centerY" secondItem="ju2-SJ-8SQ" secondAttribute="centerY" id="gdm-EL-fxa"/>
                     <constraint firstItem="wNy-wa-Wng" firstAttribute="leading" secondItem="ju2-SJ-8SQ" secondAttribute="leading" constant="20" id="kgx-Yv-ewB"/>
                     <constraint firstAttribute="trailing" secondItem="wNy-wa-Wng" secondAttribute="trailing" constant="20" id="yQM-EB-Hc4"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="gdm-EL-fxa"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <color key="tintColor" red="0.58039215690000001" green="0.71372549019999998" blue="0.043137254899999998" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
+                <outlet property="leftPaddingConstraint" destination="kgx-Yv-ewB" id="tPA-eC-lHy"/>
                 <outlet property="titleLabel" destination="wNy-wa-Wng" id="6MP-uR-hZZ"/>
             </connections>
             <point key="canvasLocation" x="291" y="350"/>

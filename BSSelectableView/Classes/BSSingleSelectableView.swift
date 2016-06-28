@@ -59,6 +59,7 @@
         cell.tintColor = BSSelectableView.tintColorForSelectedOption
         cell.titleLabel.font = BSSelectableView.fontForOption
         cell.titleLabel.textColor = option?.identifier == selectedOption?.identifier ? BSSelectableView.titleColorForSelectedOption : BSSelectableView.titleColorForOption
+        cell.leftPaddingConstraint.constant = CGFloat(BSSelectableView.leftPaddingForOption)
         cell.layoutMargins = UIEdgeInsetsZero
         
         return cell

@@ -9,4 +9,5 @@
 class BSSelectableTableViewCell: UITableViewCell {
     
     @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var leftPaddingConstraint: NSLayoutConstraint!
 }

@@ -61,6 +61,7 @@
         cell.accessoryType = .None
         cell.titleLabel.font = BSSelectableView.fontForOption
         cell.titleLabel.textColor = BSSelectableView.titleColorForOption
+        cell.leftPaddingConstraint.constant = CGFloat(BSSelectableView.leftPaddingForOption)
         cell.layoutMargins = UIEdgeInsetsZero
         
         return cell

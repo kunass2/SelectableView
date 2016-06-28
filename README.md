@@ -42,7 +42,7 @@ Simply add `BSSingleSelectableView` or `BSMultiSelectableView` as a subclass of 
 @IBOutlet public var contentOptionsHeightConstraint: NSLayoutConstraint!
 @IBOutlet public var contentOptionsView: UIView!
 @IBOutlet public var textField: UITextField! //only BSSingleSelectableView
-@IBOutlet public var tokenField: BSTokenView! //only BSMultiSelectableView
+@IBOutlet public var tokenView: BSTokenView! //only BSMultiSelectableView
 ```
 
 #### Connect following `@IBActions`:
@@ -80,14 +80,15 @@ multiselectableView.delegate = self
 @IBInspectable public var cornerRadius: CGFloat = 3 //no words needed
 ```
 
-#### You may also do some customizing:
+#### You may also do some customizing (*the following are by default*):
 
 ```Swift
 	BSSelectableView.tintColorForSelectedOption = UIColor.blueColor()
-    static public var titleColorForSelectedOption = UIColor.greenColor()
-    static public var titleColorForOption = UIColor.blackColor()
-    static public var fontForOption = UIFont.systemFontOfSize(16)
-    static public var heightForOption = 40
+    BSSelectableView.titleColorForSelectedOption = UIColor.greenColor()
+    BSSelectableView.titleColorForOption = UIColor.blackColor()
+    BSSelectableView.fontForOption = UIFont.systemFontOfSize(16)
+    BSSelectableView.leftPaddingForOption = 20
+    BSSelectableView.heightForOption = 40
 ```
 
 #### If you need you are able to call public instance methods:

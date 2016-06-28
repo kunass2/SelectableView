@@ -36,6 +36,7 @@ public class BSSelectableView: UIView {
     static public var titleColorForSelectedOption = UIColor.greenColor()
     static public var titleColorForOption = UIColor.blackColor()
     static public var fontForOption = UIFont.systemFontOfSize(16)
+    static public var leftPaddingForOption = 20
     static public var heightForOption = 40
     
     @IBInspectable public var identifier: String = ""
