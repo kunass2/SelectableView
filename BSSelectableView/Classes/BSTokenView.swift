@@ -124,7 +124,11 @@ public class BSTokenView: UIControl {
     
     override public func intrinsicContentSize() -> CGSize {
         
+        let lineHeight = dataSource?.lineHeightForTokenInField(self) ?? 30
+        
         if tokenViews.isEmpty {
+            
+            dataSource?.tokenViewDidRefreshWithHeight(lineHeight)
             return CGSizeZero
         }
 
@@ -134,7 +138,6 @@ public class BSTokenView: UIControl {
             totalRect = CGRectUnion(itemRect, totalRect)
         }
         
-        let lineHeight = dataSource?.lineHeightForTokenInField(self) ?? 30
         dataSource?.tokenViewDidRefreshWithHeight(max(totalRect.size.height, lineHeight))
         
         return totalRect.size
