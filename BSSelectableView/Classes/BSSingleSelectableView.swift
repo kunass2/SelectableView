@@ -45,6 +45,12 @@
     
     //MARK: - Internal
     
+    func setupPlaceholder() {
+        
+        textField.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: [NSForegroundColorAttributeName: BSSelectableView.textColorForPlaceholderText])
+        textField.font = BSSelectableView.fontForPlaceholderText
+    }
+    
     //MARK: - Private
     
     //MARK: - Overridden

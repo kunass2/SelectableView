@@ -77,7 +77,7 @@ multiSelectableView.delegate = self
 @IBInspectable public var cornerRadius: CGFloat = 3 //no words needed
 ```
 
-#### You may also do some customizing (*the following are by default*):
+#### You may also do some customizing (*the following are default*):
 
 ```Swift
 	BSSelectableView.tintColorForSelectedOption = UIColor.blueColor()
@@ -86,6 +86,9 @@ multiSelectableView.delegate = self
     BSSelectableView.fontForOption = UIFont.systemFontOfSize(16)
     BSSelectableView.leftPaddingForOption = 20
     BSSelectableView.heightForOption = 40
+    BSSelectableView.leftPaddingForPlaceholderText = 0
+    BSSelectableView.fontForPlaceholderText = UIFont.systemFontOfSize(14)
+    BSSelectableView.textColorForPlaceholderText = UIColor.grayColor()
 ```
 
 #### If you need you are able to call public instance methods:
