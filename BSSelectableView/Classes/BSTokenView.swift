@@ -73,9 +73,11 @@ public class BSTokenView: UIControl {
             }
         }
         
+        invalidateIntrinsicContentSize()
+        
         if count == 0 {
             
-            let placeholderLabel = UILabel(frame: CGRect(x: CGFloat(BSSelectableView.leftPaddingForPlaceholderText), y: 0, width: frame.size.width, height: frame.size.height))
+             let placeholderLabel = UILabel(frame: CGRect(x: CGFloat(BSSelectableView.leftPaddingForPlaceholderText), y: 0, width: frame.size.width, height: dataSource?.lineHeightForTokenInField(self) ?? 30))
             placeholderLabel.text = dataSource?.textForPlaceholder()
             placeholderLabel.textColor = BSSelectableView.textColorForPlaceholderText
             placeholderLabel.font = BSSelectableView.fontForPlaceholderText
@@ -83,7 +85,6 @@ public class BSTokenView: UIControl {
             addSubview(placeholderLabel)
         }
 
-        invalidateIntrinsicContentSize()
     }
     
     //MARK: - Private
