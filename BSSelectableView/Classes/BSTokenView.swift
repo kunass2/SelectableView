@@ -14,6 +14,7 @@
     func numberOfTokenInField(tokenField: BSTokenView) -> Int
     func tokenField(tokenField: BSTokenView, viewForTokenAtIndex index: Int) -> UIView?
     func tokenViewDidRefreshWithHeight(height: CGFloat)
+    func textForPlaceholder() -> String
 }
 
 public class BSTokenView: UIControl {
@@ -54,25 +55,32 @@ public class BSTokenView: UIControl {
     
     func reloadData() {
         
-        for token in tokenViews {
-            token.removeFromSuperview()
+        for subview in subviews {
+            subview.removeFromSuperview()
         }
         
         tokenViews.removeAll()
         
-        if let dataSource = dataSource {
+        let count = dataSource?.numberOfTokenInField(self) ?? 0
+        
+        for index in 0..<count {
             
-            let count = dataSource.numberOfTokenInField(self)
-            
-            for index in 0..<count {
+            if let tokenView = dataSource?.tokenField(self, viewForTokenAtIndex: index) {
                 
-                if let tokenView = dataSource.tokenField(self, viewForTokenAtIndex: index) {
-
-                    tokenView.autoresizingMask = UIViewAutoresizing.None
-                    addSubview(tokenView)
-                    tokenViews.append(tokenView)
-                }
+                tokenView.autoresizingMask = UIViewAutoresizing.None
+                addSubview(tokenView)
+                tokenViews.append(tokenView)
             }
+        }
+        
+        if count == 0 {
+            
+            let placeholderLabel = UILabel(frame: CGRect(x: CGFloat(BSSelectableView.leftPaddingForOption), y: 0, width: frame.size.width, height: frame.size.height))
+            placeholderLabel.text = dataSource?.textForPlaceholder()
+            placeholderLabel.textColor = BSSelectableView.titleColorForOption
+            placeholderLabel.font = BSSelectableView.fontForOption
+            
+            addSubview(placeholderLabel)
         }
 
         invalidateIntrinsicContentSize()

@@ -10,6 +10,7 @@
     
     @IBOutlet public var tokenView: BSTokenView!
     @IBOutlet public var tokenViewHeightConstraint: NSLayoutConstraint?
+    
     public var selectedOptions = [BSSelectableOption]() {
         
         didSet {
@@ -95,7 +96,7 @@
         delegate?.multiSelectableView?(self, didSelectOption: selectedOption)
     }
     
-    //MARK: - ZFTokenFieldDataSource
+    //MARK: - BSTokenViewDataSource
     
     func lineHeightForTokenInField(tokenField: BSTokenView) -> CGFloat {
         return delegate?.lineHeightForTokenInMultiSelectableView?() ?? 30
@@ -112,4 +113,10 @@
     func tokenViewDidRefreshWithHeight(height: CGFloat) {
         tokenViewHeightConstraint?.constant = height
     }
+    
+    func textForPlaceholder() -> String {
+        return placeholderText
+    }
+    
+    
 }

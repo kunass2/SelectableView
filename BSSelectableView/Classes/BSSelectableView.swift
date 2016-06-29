@@ -45,6 +45,7 @@ public class BSSelectableView: UIView {
     
     @IBInspectable public var identifier: String = ""
     @IBInspectable public var maxNumberOfRows: Int = 6
+    @IBInspectable public var placeholderText: String = ""
     @IBInspectable public var cornerRadius: CGFloat = 3 {
         
         didSet {
