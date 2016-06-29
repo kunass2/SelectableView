@@ -8,7 +8,7 @@
 
 class ViewController: UIViewController, BSSelectableViewDelegate {
     
-    @IBOutlet var selectableView: BSSelectableView!
+    @IBOutlet var selectableView: BSSingleSelectableView!
     @IBOutlet var multiselectableView: BSMultiSelectableView!
     
     override func viewDidLoad() {
@@ -19,28 +19,28 @@ class ViewController: UIViewController, BSSelectableViewDelegate {
         selectableView.delegate = self
         multiselectableView.delegate = self
         
-        multiselectableView.selectedOptions = [BSSelectableOption(identifier: 0, title: "First title"), BSSelectableOption(identifier: 1, title: "aaa")]
-        multiselectableView.updateView()
+        selectableView.selectedOption = BSSelectableOption(index: 0, title: "First title", identifier: "a")
+        multiselectableView.selectedOptions = [BSSelectableOption(index: 0, title: "First title", identifier: "a"), BSSelectableOption(index: 1, title: "aaa", identifier: "b")]
     }
     
     func selectableOptionsForSelectableViewWithIdentifier(identifier: String) -> [BSSelectableOption] {
         
         return [
-            BSSelectableOption(identifier: 0, title: "First title"),
-            BSSelectableOption(identifier: 1, title: "aaa"),
-            BSSelectableOption(identifier: 2, title: "Second Title"),
-            BSSelectableOption(identifier: 3, title: "bbb super dlugi name oleeeeee hello super dluhi jestem gosc ole oeoeoeoeoeoeoeooe oeoeo eoe oeoe eoeooe hhh"),
-            BSSelectableOption(identifier: 4, title: "ccc"),
-            BSSelectableOption(identifier: 5, title: "ddd"),
-            BSSelectableOption(identifier: 6, title: "ee e"),
-            BSSelectableOption(identifier: 7, title: "Second Title"),
-            BSSelectableOption(identifier: 8, title: "Second Title"),
-            BSSelectableOption(identifier: 9, title: "Second Title"),
-            BSSelectableOption(identifier: 10, title: "tttttt"),
-            BSSelectableOption(identifier: 11, title: "Second Title"),
-            BSSelectableOption(identifier: 12, title: "Second Title"),
-            BSSelectableOption(identifier: 13, title: "Second Title"),
-            BSSelectableOption(identifier: 14, title: "Second Title")
+            BSSelectableOption(index: 0, title: "First title", identifier: "a"),
+            BSSelectableOption(index: 1, title: "aaa", identifier: "b"),
+            BSSelectableOption(index: 2, title: "Second Title", identifier: "c"),
+            BSSelectableOption(index: 3, title: "bbb super dlugi name oleeeeee hello super dluhi jestem gosc ole oeoeoeoeoeoeoeooe oeoeo eoe oeoe eoeooe hhh", identifier: "d"),
+            BSSelectableOption(index: 4, title: "ccc", identifier: "e"),
+            BSSelectableOption(index: 5, title: "ddd", identifier: "f"),
+            BSSelectableOption(index: 6, title: "ee e", identifier: "g"),
+            BSSelectableOption(index: 7, title: "Second Title", identifier: "h"),
+            BSSelectableOption(index: 8, title: "Second Title", identifier: "i"),
+            BSSelectableOption(index: 9, title: "Second Title", identifier: "j"),
+            BSSelectableOption(index: 10, title: "tttttt", identifier: "k"),
+            BSSelectableOption(index: 11, title: "Second Title", identifier: "l"),
+            BSSelectableOption(index: 12, title: "Second Title", identifier: "m"),
+            BSSelectableOption(index: 13, title: "Second Title", identifier: "n"),
+            BSSelectableOption(index: 14, title: "Second Title", identifier: "o")
         ]
     }
     
@@ -53,11 +53,14 @@ class ViewController: UIViewController, BSSelectableViewDelegate {
         
         tokenView.performHandler = {
             
-//            view.options.append(option)
+            view.options.append(option)
             view.selectedOptions.removeAtIndex(index)
-//            view.updateView()
         }
         
         return tokenView
+    }
+    
+    func selectableViewToggledOptionsWithButton(button: UIButton, expanded: Bool) {
+        print(expanded)
     }
 }

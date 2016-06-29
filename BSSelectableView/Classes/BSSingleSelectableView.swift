@@ -21,18 +21,22 @@
     
     //MARK: - Initialization
     
+    public override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        switchButton.addTarget(self, action: #selector(switchButtonTapped), forControlEvents: .TouchUpInside)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        options = delegate?.selectableOptionsForSelectableViewWithIdentifier(identifier) ?? []
+    }
+    
     //MARK: - Deinitialization
     
     //MARK: - Actions
     
-    @IBAction public func switchButtonTapped(sender: UIButton) {
-        
-        setupViewAndDataSourceIfNeeded()
-        tableView.delegate = self
-        tableView.dataSource = self
-        
+    func switchButtonTapped(sender: UIButton) {
         expanded = !expanded
-        tableView.reloadData()
     }
     
     //MARK: - Public
@@ -61,6 +65,7 @@
         cell.titleLabel.textColor = option.identifier == selectedOption?.identifier ? BSSelectableView.titleColorForSelectedOption : BSSelectableView.titleColorForOption
         cell.leftPaddingConstraint.constant = CGFloat(BSSelectableView.leftPaddingForOption)
         cell.layoutMargins = UIEdgeInsetsZero
+        cell.selectionStyle = .None
         
         return cell
     }

@@ -14,17 +14,18 @@
         
         didSet {
             
-            setupDataSource()
-            
             for selectedOption in selectedOptions {
                 
                 for (index, option) in options.enumerate() {
                     
-                    if selectedOption.identifier == option.identifier {
+                    if selectedOption.index == option.index {
                         options.removeAtIndex(index)
                     }
                 }
             }
+            
+            selectedOptions.sortInPlace { $0.index <= $1.index }
+            tokenView.reloadData()
         }
     }
     
@@ -32,39 +33,29 @@
     
     //MARK: - Initialization
     
+    public override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        switchButton.addTarget(self, action: #selector(switchButtonTapped), forControlEvents: .TouchUpInside)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tokenView.dataSource = self
+    }
+    
     //MARK: - Deinitialization
     
     //MARK: - Actions
     
-    @IBAction public func switchButtonTapped(sender: UIButton) {
-        
-        setupDataSource()
-        
-        expanded = !expanded
-        tableView.reloadData()
-    }
-    
     //MARK: - Public
-    
-    public override func updateView() {
-        
-        selectedOptions.sortInPlace { $0.identifier <= $1.identifier }
-        tokenView.reloadData()
-        super.updateView()
-    }
     
     //MARK: - Internal
     
-    //MARK: - Private
-    
-    private func setupDataSource() {
-        
-        setupViewAndDataSourceIfNeeded()
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        tokenView.dataSource = self
+    func switchButtonTapped(sender: UIButton) {
+        expanded = !expanded
     }
+    
+    //MARK: - Private
     
     //MARK: - Overridden
     
@@ -85,6 +76,7 @@
         cell.titleLabel.textColor = BSSelectableView.titleColorForOption
         cell.leftPaddingConstraint.constant = CGFloat(BSSelectableView.leftPaddingForOption)
         cell.layoutMargins = UIEdgeInsetsZero
+        cell.selectionStyle = .None
         
         return cell
     }
@@ -98,11 +90,7 @@
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let selectedOption = options[indexPath.row]
-            
-        options.removeAtIndex(indexPath.row)
         selectedOptions.append(selectedOption)
-        
-        updateView()
         
         delegate?.multiSelectableView?(self, didSelectOption: selectedOption)
     }
@@ -118,7 +106,7 @@
     }
     
     func tokenField(tokenField: BSTokenView, viewForTokenAtIndex index: Int) -> UIView? {
-        return delegate?.multiSelectableView?(self, tokenViewForOption: selectedOptions[index], atIndex: index)
+        return delegate?.multiSelectableView(self, tokenViewForOption: selectedOptions[index], atIndex: index)
     }
     
     func tokenViewDidRefreshWithHeight(height: CGFloat) {

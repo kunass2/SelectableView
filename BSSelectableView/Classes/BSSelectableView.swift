@@ -8,11 +8,14 @@
 
 public class BSSelectableOption: NSObject {
     
-    public var identifier = 0
-    public var title = ""
+    public var index: Int
+    public var identifier: String
+    public var title: String
+    public var descendantOptions = [BSSelectableOption]()
     
-    public init(identifier: Int, title: String) {
+    public init(index: Int, title: String, identifier: String) {
         
+        self.index = index
         self.identifier = identifier
         self.title = title
     }
@@ -21,11 +24,12 @@ public class BSSelectableOption: NSObject {
 @objc public protocol BSSelectableViewDelegate {
     
     func selectableOptionsForSelectableViewWithIdentifier(identifier: String) -> [BSSelectableOption]
+    func multiSelectableView(view: BSMultiSelectableView, tokenViewForOption option: BSSelectableOption, atIndex index: Int) -> UIView
+    
     optional func singleSelectableView(view: BSSingleSelectableView, didSelectOption option: BSSelectableOption)
     optional func multiSelectableView(view: BSMultiSelectableView, didSelectOption option: BSSelectableOption)
-    optional func multiSelectableView(view: BSMultiSelectableView, didRemoveOption option: BSSelectableOption)
-    optional func multiSelectableView(view: BSMultiSelectableView, tokenViewForOption option: BSSelectableOption, atIndex index: Int) -> UIView
     optional func lineHeightForTokenInMultiSelectableView() -> CGFloat
+    optional func selectableViewToggledOptionsWithButton(button: UIButton, expanded: Bool)
 }
 
 let BSSelectableTableViewCellIdentifier = "SelectableTableViewCellIdentifier"
@@ -50,26 +54,64 @@ public class BSSelectableView: UIView {
         }
     }
     
+    @IBOutlet public var switchButton: UIButton!
     @IBOutlet public var contentOptionsHeightConstraint: NSLayoutConstraint!
     @IBOutlet public var contentOptionsView: UIView!
     
-    weak public var delegate: BSSelectableViewDelegate?
+    weak public var delegate: BSSelectableViewDelegate? {
+        
+        didSet {
+            options = delegate?.selectableOptionsForSelectableViewWithIdentifier(identifier) ?? []
+        }
+    }
     
-    public var options = [BSSelectableOption]()
+    public var options = [BSSelectableOption]() {
+        
+        didSet {
+            
+            options.sortInPlace { $0.index <= $1.index }
+            tableView.reloadData()
+            updateContentOptionsHeight()
+        }
+    }
     
     var tableView = UITableView()
     var expanded = false {
         
         didSet {
+            
             updateContentOptionsHeight()
+            delegate?.selectableViewToggledOptionsWithButton?(switchButton, expanded: expanded)
         }
     }
-    
-    private var optionsFetched = false
     
     //MARK: - Class Methods
     
     //MARK: - Initialization
+    
+    public override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.bounces = false
+        tableView.rowHeight = 40
+        tableView.separatorInset = UIEdgeInsetsZero
+        tableView.layoutMargins = UIEdgeInsetsZero
+        tableView.accessibilityIdentifier = identifier
+        
+        let nib = UINib(nibName: "BSSelectableTableViewCell", bundle: NSBundle(forClass: BSSelectableTableViewCell.classForCoder()))
+        tableView.registerNib(nib, forCellReuseIdentifier: BSSelectableTableViewCellIdentifier)
+        
+        contentOptionsView.addSubview(tableView)
+        
+        let topConstraint = NSLayoutConstraint(item: tableView, attribute: .Top, relatedBy: .Equal, toItem: contentOptionsView, attribute: .Top, multiplier: 1, constant: 0)
+        let trailingConstraint = NSLayoutConstraint(item: tableView, attribute: .Trailing, relatedBy: .Equal, toItem: contentOptionsView, attribute: .Trailing, multiplier: 1, constant: 0)
+        let bottomConstraint = NSLayoutConstraint(item: tableView, attribute: .Bottom, relatedBy: .Equal, toItem: contentOptionsView, attribute: .Bottom, multiplier: 1, constant: 0)
+        let leadingConstraint = NSLayoutConstraint(item: tableView, attribute: .Leading, relatedBy: .Equal, toItem: contentOptionsView, attribute: .Leading, multiplier: 1, constant: 0)
+        
+        contentOptionsView.addConstraints([topConstraint, trailingConstraint, bottomConstraint, leadingConstraint])
+        contentOptionsView.layoutIfNeeded()
+    }
     
     //MARK: - Deinitialization
     
@@ -81,57 +123,10 @@ public class BSSelectableView: UIView {
         expanded = false
     }
     
-    public func updateView() {
-        
-        sortOptions()
-        tableView.reloadData()
-        updateContentOptionsHeight()
-    }
-    
     //MARK: - Internal
     
     func updateContentOptionsHeight() {
-        
-        print("++\(expanded)")
-        print((options.count))
-        print(maxNumberOfRows * BSSelectableView.heightForOption)
         contentOptionsHeightConstraint.constant = expanded ? CGFloat(min((options.count) * BSSelectableView.heightForOption, maxNumberOfRows * BSSelectableView.heightForOption)) : 0
-        
-        print("-->>\(contentOptionsHeightConstraint.constant)")
-    }
-    
-    func setupViewAndDataSourceIfNeeded() {
-        
-        if !optionsFetched {
-            
-            tableView.translatesAutoresizingMaskIntoConstraints = false
-            tableView.bounces = false
-            tableView.rowHeight = 40
-            tableView.separatorInset = UIEdgeInsetsZero
-            tableView.layoutMargins = UIEdgeInsetsZero
-            tableView.accessibilityIdentifier = identifier
-            
-            let nib = UINib(nibName: "BSSelectableTableViewCell", bundle: NSBundle(forClass: BSSelectableTableViewCell.classForCoder()))
-            tableView.registerNib(nib, forCellReuseIdentifier: BSSelectableTableViewCellIdentifier)
-            
-            contentOptionsView.addSubview(tableView)
-            
-            let topConstraint = NSLayoutConstraint(item: tableView, attribute: .Top, relatedBy: .Equal, toItem: contentOptionsView, attribute: .Top, multiplier: 1, constant: 0)
-            let trailingConstraint = NSLayoutConstraint(item: tableView, attribute: .Trailing, relatedBy: .Equal, toItem: contentOptionsView, attribute: .Trailing, multiplier: 1, constant: 0)
-            let bottomConstraint = NSLayoutConstraint(item: tableView, attribute: .Bottom, relatedBy: .Equal, toItem: contentOptionsView, attribute: .Bottom, multiplier: 1, constant: 0)
-            let leadingConstraint = NSLayoutConstraint(item: tableView, attribute: .Leading, relatedBy: .Equal, toItem: contentOptionsView, attribute: .Leading, multiplier: 1, constant: 0)
-            
-            contentOptionsView.addConstraints([topConstraint, trailingConstraint, bottomConstraint, leadingConstraint])
-            contentOptionsView.layoutIfNeeded()
-            
-            options = delegate?.selectableOptionsForSelectableViewWithIdentifier(identifier) ?? []
-            sortOptions()
-            optionsFetched = true
-        }
-    }
-    
-    func sortOptions() {
-        options.sortInPlace { $0.identifier <= $1.identifier }
     }
     
     //MARK: - Private

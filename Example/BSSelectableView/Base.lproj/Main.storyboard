@@ -35,9 +35,6 @@
                                         <state key="normal" title="Switch">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <connections>
-                                            <action selector="switchButtonTapped:" destination="lea-QO-d3X" eventType="touchUpInside" id="uuB-Od-sYh"/>
-                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eee-ti-WVO">
                                         <rect key="frame" x="8" y="41" width="584" height="0.0"/>
@@ -76,6 +73,7 @@
                                 <connections>
                                     <outlet property="contentOptionsHeightConstraint" destination="9Ix-cz-nJ0" id="wFV-GP-NqM"/>
                                     <outlet property="contentOptionsView" destination="eee-ti-WVO" id="VCu-44-fs4"/>
+                                    <outlet property="switchButton" destination="x64-CI-nbG" id="tUY-N0-RGW"/>
                                     <outlet property="textField" destination="SRe-5W-6sH" id="EJD-7R-Fnf"/>
                                 </connections>
                             </view>
@@ -94,9 +92,6 @@
                                         <state key="normal" title="Switch">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <connections>
-                                            <action selector="switchButtonTapped:" destination="dZy-fY-Sa7" eventType="touchUpInside" id="88y-vi-wog"/>
-                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0gL-xF-iwe">
                                         <rect key="frame" x="8" y="55" width="584" height="0.0"/>
@@ -141,6 +136,7 @@
                                 <connections>
                                     <outlet property="contentOptionsHeightConstraint" destination="TlH-Ev-xjj" id="nYN-D2-m32"/>
                                     <outlet property="contentOptionsView" destination="0gL-xF-iwe" id="fjb-ru-jm2"/>
+                                    <outlet property="switchButton" destination="P33-0v-Aag" id="hsS-OW-rub"/>
                                     <outlet property="tokenView" destination="4UV-0G-Sjc" id="OgH-n8-qpp"/>
                                     <outlet property="tokenViewHeightConstraint" destination="9QF-7k-qbZ" id="B1F-Va-X3z"/>
                                 </connections>

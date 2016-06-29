@@ -39,24 +39,19 @@ Simply add `BSSingleSelectableView` or `BSMultiSelectableView` as a subclass of 
 #### Connect following `@IBOutlets`:
 
 ```Swift
+@IBOutlet public var switchButton: UIButton!
 @IBOutlet public var contentOptionsHeightConstraint: NSLayoutConstraint!
 @IBOutlet public var contentOptionsView: UIView!
 @IBOutlet public var textField: UITextField! //only BSSingleSelectableView
 @IBOutlet public var tokenView: BSTokenView! //only BSMultiSelectableView
-@IBOutlet public var tokenViewHeightConstraint: NSLayoutConstraint? ////only BSMultiSelectableView, useful within UIScrollView
-```
-
-#### Connect following `@IBActions`:
-
-```Swift
-@IBAction public func switchButtonTapped(sender: UIButton) { ... }
+@IBOutlet public var tokenViewHeightConstraint: NSLayoutConstraint? //only BSMultiSelectableView, useful within UIScrollView
 ```
 
 #### Assing delegates for your selectable views in `viewDidLoad()`:
 
 ```Swift
-selectableView.delegate = self
-multiselectableView.delegate = self
+singleSelectableView.delegate = self
+multiSelectableView.delegate = self
 ```
 
 #### Conform your `UIViewController` to `BSSelectableViewDelegate` declared as following:
@@ -64,12 +59,13 @@ multiselectableView.delegate = self
 ```Swift
 @objc public protocol BSSelectableViewDelegate {
     
-    func selectableOptionsForSelectableViewWithIdentifier(identifier: String) -> [BSSelectableOption] //called only once along with switchButtonTapped()
+    func selectableOptionsForSelectableViewWithIdentifier(identifier: String) -> [BSSelectableOption]
+    func multiSelectableView(view: BSMultiSelectableView, tokenViewForOption option: BSSelectableOption, atIndex index: Int) -> UIView
+    
     optional func singleSelectableView(view: BSSingleSelectableView, didSelectOption option: BSSelectableOption)
     optional func multiSelectableView(view: BSMultiSelectableView, didSelectOption option: BSSelectableOption)
-    optional func multiSelectableView(view: BSMultiSelectableView, didRemoveOption option: BSSelectableOption)
-    optional func multiSelectableView(view: BSMultiSelectableView, tokenViewForOption option: BSSelectableOption, atIndex index: Int) -> UIView
     optional func lineHeightForTokenInMultiSelectableView() -> CGFloat //default is 30
+    optional func selectableViewToggledOptionsWithButton(button: UIButton, expanded: Bool)
 }
 ```
 
@@ -96,7 +92,6 @@ multiselectableView.delegate = self
 
 ```Swift
 public func hideOptions() //collapse selectable options
-public func updateView() //update view once you perform changes on the source
 ```
 
 #### You have access to the following properties:
@@ -110,7 +105,20 @@ public var selectedOptions = [BSSelectableOption]() //BSMultiSelectableView
 #### `BSSelectableOption` is defined as follows:
 
 ```Swift
-let option = BSSelectableOption(identifier: 0, title: "First")
+public class BSSelectableOption: NSObject {
+    
+    public var index: Int
+    public var identifier: String
+    public var title: String
+    public var descendantOptions = [BSSelectableOption]()
+    
+    public init(index: Int, title: String, identifier: String) {
+        
+        self.index = index
+        self.identifier = identifier
+        self.title = title
+    }
+}
 ```
 
 ## Author
