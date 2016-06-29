@@ -42,6 +42,9 @@ public class BSSelectableView: UIView {
     static public var fontForOption = UIFont.systemFontOfSize(16)
     static public var leftPaddingForOption = 20
     static public var heightForOption = 40
+    static public var leftPaddingForPlaceholderText = 0
+    static public var fontForPlaceholderText = UIFont.systemFontOfSize(14)
+    static public var textColorForPlaceholderText = UIColor.grayColor()
     
     @IBInspectable public var identifier: String = ""
     @IBInspectable public var maxNumberOfRows: Int = 6
@@ -62,7 +65,9 @@ public class BSSelectableView: UIView {
     weak public var delegate: BSSelectableViewDelegate? {
         
         didSet {
+            
             options = delegate?.selectableOptionsForSelectableViewWithIdentifier(identifier) ?? []
+            (self as? BSMultiSelectableView)?.tokenView.reloadData()
         }
     }
     
@@ -104,6 +109,7 @@ public class BSSelectableView: UIView {
         tableView.registerNib(nib, forCellReuseIdentifier: BSSelectableTableViewCellIdentifier)
         
         contentOptionsView.addSubview(tableView)
+        print("22")
         
         let topConstraint = NSLayoutConstraint(item: tableView, attribute: .Top, relatedBy: .Equal, toItem: contentOptionsView, attribute: .Top, multiplier: 1, constant: 0)
         let trailingConstraint = NSLayoutConstraint(item: tableView, attribute: .Trailing, relatedBy: .Equal, toItem: contentOptionsView, attribute: .Trailing, multiplier: 1, constant: 0)

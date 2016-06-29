@@ -16,6 +16,7 @@ class ViewController: UIViewController, BSSelectableViewDelegate {
         
         BSSelectableView.titleColorForSelectedOption = UIColor.redColor()
         BSSelectableView.leftPaddingForOption = 10
+        print("11")
         selectableView.delegate = self
         multiselectableView.delegate = self
         
@@ -58,9 +59,5 @@ class ViewController: UIViewController, BSSelectableViewDelegate {
         }
         
         return tokenView
-    }
-    
-    func selectableViewToggledOptionsWithButton(button: UIButton, expanded: Bool) {
-        print(expanded)
     }
 }

@@ -75,10 +75,10 @@ public class BSTokenView: UIControl {
         
         if count == 0 {
             
-            let placeholderLabel = UILabel(frame: CGRect(x: CGFloat(BSSelectableView.leftPaddingForOption), y: 0, width: frame.size.width, height: frame.size.height))
+            let placeholderLabel = UILabel(frame: CGRect(x: CGFloat(BSSelectableView.leftPaddingForPlaceholderText), y: 0, width: frame.size.width, height: frame.size.height))
             placeholderLabel.text = dataSource?.textForPlaceholder()
-            placeholderLabel.textColor = BSSelectableView.titleColorForOption
-            placeholderLabel.font = BSSelectableView.fontForOption
+            placeholderLabel.textColor = BSSelectableView.textColorForPlaceholderText
+            placeholderLabel.font = BSSelectableView.fontForPlaceholderText
             
             addSubview(placeholderLabel)
         }
