@@ -13,7 +13,9 @@
     public var selectedOption: BSSelectableOption? {
         
         didSet {
+            
             textField.text = selectedOption?.title
+            tableView.reloadData()
         }
     }
     
