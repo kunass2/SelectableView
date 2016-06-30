@@ -47,6 +47,7 @@ public class BSSelectableView: UIView {
     static public var textColorForPlaceholderText = UIColor.grayColor()
     
     @IBInspectable public var identifier: String = ""
+    @IBInspectable public var tableViewAccessibilityIdentifier: String = ""
     @IBInspectable public var maxNumberOfRows: Int = 6
     @IBInspectable public var placeholderText: String = ""
     @IBInspectable public var cornerRadius: CGFloat = 3 {
@@ -104,13 +105,12 @@ public class BSSelectableView: UIView {
         tableView.rowHeight = 40
         tableView.separatorInset = UIEdgeInsetsZero
         tableView.layoutMargins = UIEdgeInsetsZero
-        tableView.accessibilityIdentifier = identifier
+        tableView.accessibilityIdentifier = tableViewAccessibilityIdentifier
         
         let nib = UINib(nibName: "BSSelectableTableViewCell", bundle: NSBundle(forClass: BSSelectableTableViewCell.classForCoder()))
         tableView.registerNib(nib, forCellReuseIdentifier: BSSelectableTableViewCellIdentifier)
         
         contentOptionsView.addSubview(tableView)
-        print("22")
         
         let topConstraint = NSLayoutConstraint(item: tableView, attribute: .Top, relatedBy: .Equal, toItem: contentOptionsView, attribute: .Top, multiplier: 1, constant: 0)
         let trailingConstraint = NSLayoutConstraint(item: tableView, attribute: .Trailing, relatedBy: .Equal, toItem: contentOptionsView, attribute: .Trailing, multiplier: 1, constant: 0)

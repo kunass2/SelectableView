@@ -91,6 +91,16 @@ multiSelectableView.delegate = self
     BSSelectableView.textColorForPlaceholderText = UIColor.grayColor()
 ```
 
+#### You may in case you need it, set some custom properties right into **Interface Builder**, the following are default:
+
+```Swift
+    @IBInspectable public var identifier: String = ""
+    @IBInspectable public var tableViewAccessibilityIdentifier: String = ""
+    @IBInspectable public var maxNumberOfRows: Int = 6
+    @IBInspectable public var placeholderText: String = ""
+    @IBInspectable public var cornerRadius: CGFloat = 3
+```
+
 #### If you need you are able to call public instance methods:
 
 ```Swift
