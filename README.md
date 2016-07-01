@@ -1,8 +1,15 @@
 # BSSelectableView
 
+![](Assets/1.png)
+![](Assets/2.png)
+![](Assets/3.png)
+![](Assets/4.png)
+![](Assets/5.png)
+![](Assets/6.png)
+
 ## Installation
 
-`BSSelectableView` is available through [CocoaPods](https://cocoapods.org/?q=bsselectab). To install
+`BSSelectableView` is available through [CocoaPods](https://cocoapods.org/pods/BSSelectableView). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
