@@ -18,46 +18,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lea-QO-d3X" customClass="BSSingleSelectableView" customModule="BSSelectableView">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lea-QO-d3X" customClass="BSSingleSelectableView" customModule="BSSelectableView">
                                 <rect key="frame" x="0.0" y="40" width="600" height="54"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SRe-5W-6sH">
-                                        <rect key="frame" x="20" y="3" width="518" height="30"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="tjo-mu-9d3"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="755" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x64-CI-nbG">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" horizontalCompressionResistancePriority="755" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x64-CI-nbG">
                                         <rect key="frame" x="543" y="17" width="47" height="16"/>
                                         <state key="normal" title="Switch">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eee-ti-WVO">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eee-ti-WVO">
                                         <rect key="frame" x="8" y="41" width="584" height="0.0"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" id="9Ix-cz-nJ0"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rCf-Pi-uQc">
+                                        <rect key="frame" x="20" y="10" width="503" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="16R-oX-MmC"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.61176470589999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="x64-CI-nbG" secondAttribute="trailing" constant="10" id="0bu-Jv-WWe"/>
                                     <constraint firstItem="eee-ti-WVO" firstAttribute="top" secondItem="x64-CI-nbG" secondAttribute="bottom" constant="8" id="1Db-4W-n3x"/>
+                                    <constraint firstItem="x64-CI-nbG" firstAttribute="leading" secondItem="rCf-Pi-uQc" secondAttribute="trailing" constant="20" id="A87-v4-m4t"/>
                                     <constraint firstItem="eee-ti-WVO" firstAttribute="top" secondItem="x64-CI-nbG" secondAttribute="bottom" constant="8" id="FK2-hW-3Z7"/>
                                     <constraint firstAttribute="width" constant="240" id="Hm4-4B-pJO"/>
-                                    <constraint firstItem="eee-ti-WVO" firstAttribute="top" secondItem="SRe-5W-6sH" secondAttribute="bottom" constant="8" id="S1y-lv-Hez"/>
-                                    <constraint firstItem="SRe-5W-6sH" firstAttribute="top" secondItem="lea-QO-d3X" secondAttribute="top" constant="3" id="ajl-kN-onH"/>
+                                    <constraint firstItem="rCf-Pi-uQc" firstAttribute="leading" secondItem="lea-QO-d3X" secondAttribute="leading" constant="20" id="LG0-2a-Ofo"/>
+                                    <constraint firstItem="eee-ti-WVO" firstAttribute="top" secondItem="rCf-Pi-uQc" secondAttribute="bottom" constant="10" id="Zjm-PG-JIu"/>
                                     <constraint firstAttribute="bottom" secondItem="eee-ti-WVO" secondAttribute="bottom" constant="13" id="bMf-PG-qhY"/>
                                     <constraint firstItem="eee-ti-WVO" firstAttribute="leading" secondItem="lea-QO-d3X" secondAttribute="leading" constant="8" id="brD-sd-F8p"/>
                                     <constraint firstAttribute="trailing" secondItem="eee-ti-WVO" secondAttribute="trailing" constant="8" id="gak-9j-lea"/>
-                                    <constraint firstItem="x64-CI-nbG" firstAttribute="leading" secondItem="SRe-5W-6sH" secondAttribute="trailing" constant="5" id="l1n-RV-4jD"/>
+                                    <constraint firstItem="rCf-Pi-uQc" firstAttribute="top" secondItem="lea-QO-d3X" secondAttribute="top" constant="10" id="nIm-Lc-1bu"/>
                                     <constraint firstItem="x64-CI-nbG" firstAttribute="top" secondItem="lea-QO-d3X" secondAttribute="top" constant="17" id="qwS-Sa-cCK"/>
-                                    <constraint firstItem="SRe-5W-6sH" firstAttribute="leading" secondItem="lea-QO-d3X" secondAttribute="leading" constant="20" id="vTO-cA-j3h"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -74,11 +74,11 @@
                                 <connections>
                                     <outlet property="contentOptionsHeightConstraint" destination="9Ix-cz-nJ0" id="wFV-GP-NqM"/>
                                     <outlet property="contentOptionsView" destination="eee-ti-WVO" id="VCu-44-fs4"/>
+                                    <outlet property="selectedOptionLabel" destination="rCf-Pi-uQc" id="lEb-nl-ssX"/>
                                     <outlet property="switchButton" destination="x64-CI-nbG" id="tUY-N0-RGW"/>
-                                    <outlet property="textField" destination="SRe-5W-6sH" id="EJD-7R-Fnf"/>
                                 </connections>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZy-fY-Sa7" customClass="BSMultiSelectableView" customModule="BSSelectableView">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dZy-fY-Sa7" customClass="BSMultiSelectableView" customModule="BSSelectableView">
                                 <rect key="frame" x="0.0" y="114" width="600" height="68"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4UV-0G-Sjc" customClass="BSTokenView" customModule="BSSelectableView">

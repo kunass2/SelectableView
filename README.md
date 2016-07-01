@@ -42,7 +42,7 @@ Simply add `BSSingleSelectableView` or `BSMultiSelectableView` as a subclass of 
 @IBOutlet public var switchButton: UIButton!
 @IBOutlet public var contentOptionsHeightConstraint: NSLayoutConstraint!
 @IBOutlet public var contentOptionsView: UIView!
-@IBOutlet public var textField: UITextField! //only BSSingleSelectableView
+@IBOutlet public var selectedOptionLabel: UILabel! //only BSSingleSelectableView
 @IBOutlet public var tokenView: BSTokenView! //only BSMultiSelectableView
 @IBOutlet public var tokenViewHeightConstraint: NSLayoutConstraint? //only BSMultiSelectableView, useful within UIScrollView
 ```

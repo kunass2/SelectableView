@@ -8,14 +8,12 @@
 
 @IBDesignable public class BSSingleSelectableView: BSSelectableView, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet public var textField: UITextField!
+    @IBOutlet public var selectedOptionLabel: UILabel!
     
     public var selectedOption: BSSelectableOption? {
         
         didSet {
-            
-            textField.text = selectedOption?.title
-            tableView.reloadData()
+            setupLabel()
         }
     }
     
@@ -45,10 +43,25 @@
     
     //MARK: - Internal
     
-    func setupPlaceholder() {
+    func setupLabel() {
         
-        textField.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: [NSForegroundColorAttributeName: BSSelectableView.textColorForPlaceholderText])
-        textField.font = BSSelectableView.fontForPlaceholderText
+        selectedOptionLabel.numberOfLines = 0
+        selectedOptionLabel.adjustsFontSizeToFitWidth = true
+        selectedOptionLabel.minimumScaleFactor = 0.2
+        tableView.reloadData()
+        
+        if selectedOption == nil {
+            
+            selectedOptionLabel.text = placeholderText
+            selectedOptionLabel.font = BSSelectableView.fontForPlaceholderText
+            selectedOptionLabel.textColor = BSSelectableView.textColorForPlaceholderText
+            
+        } else {
+            
+            selectedOptionLabel.text = selectedOption?.title
+            selectedOptionLabel.textColor = BSSelectableView.titleColorForOption
+            selectedOptionLabel.font = BSSelectableView.fontForOption
+        }
     }
     
     //MARK: - Private

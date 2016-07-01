@@ -69,7 +69,7 @@ public class BSSelectableView: UIView {
             
             options = delegate?.selectableOptionsForSelectableViewWithIdentifier(identifier) ?? []
             (self as? BSMultiSelectableView)?.tokenView.reloadData()
-            (self as? BSSingleSelectableView)?.setupPlaceholder()
+            (self as? BSSingleSelectableView)?.setupLabel()
         }
     }
     

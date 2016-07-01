@@ -16,11 +16,11 @@ class ViewController: UIViewController, BSSelectableViewDelegate {
         
         BSSelectableView.titleColorForSelectedOption = UIColor.redColor()
         BSSelectableView.leftPaddingForOption = 10
-        print("11")
+    
         selectableView.delegate = self
         multiselectableView.delegate = self
         
-        selectableView.selectedOption = BSSelectableOption(index: 0, title: "First title", identifier: "a")
+//        selectableView.selectedOption = BSSelectableOption(index: 0, title: "First title", identifier: "a")
         multiselectableView.selectedOptions = [BSSelectableOption(index: 0, title: "First title", identifier: "a"), BSSelectableOption(index: 1, title: "aaa", identifier: "b")]
     }
     
