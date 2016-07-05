@@ -28,7 +28,7 @@
         
         tableView.delegate = self
         tableView.dataSource = self
-        options = delegate?.selectableOptionsForSelectableViewWithIdentifier(identifier) ?? []
+        options = delegate?.selectableOptionsForSelectableViewWithIdentifier?(identifier) ?? options
     }
     
     //MARK: - Deinitialization

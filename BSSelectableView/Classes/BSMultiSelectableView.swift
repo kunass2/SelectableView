@@ -110,7 +110,7 @@
     }
     
     func viewForTokenAtIndex(index: Int) -> UIView? {
-        return delegate?.multiSelectableView(self, tokenViewForOption: selectedOptions[index], atIndex: index)
+        return delegate?.multiSelectableView?(self, tokenViewForOption: selectedOptions[index], atIndex: index)
     }
     
     func tokenViewDidRefreshWithHeight(height: CGFloat) {

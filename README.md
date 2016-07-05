@@ -67,8 +67,8 @@ multiSelectableView.delegate = self
 ```Swift
 @objc public protocol BSSelectableViewDelegate {
     
-    func selectableOptionsForSelectableViewWithIdentifier(identifier: String) -> [BSSelectableOption]
-    func multiSelectableView(view: BSMultiSelectableView, tokenViewForOption option: BSSelectableOption, atIndex index: Int) -> UIView
+    optional func selectableOptionsForSelectableViewWithIdentifier(identifier: String) -> [BSSelectableOption]
+    optional func multiSelectableView(view: BSMultiSelectableView, tokenViewForOption option: BSSelectableOption, atIndex index: Int) -> UIView
     
     optional func singleSelectableView(view: BSSingleSelectableView, didSelectOption option: BSSelectableOption)
     optional func multiSelectableView(view: BSMultiSelectableView, didSelectOption option: BSSelectableOption)

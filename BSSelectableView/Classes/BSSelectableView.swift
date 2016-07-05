@@ -23,8 +23,8 @@ public class BSSelectableOption: NSObject {
 
 @objc public protocol BSSelectableViewDelegate {
     
-    func selectableOptionsForSelectableViewWithIdentifier(identifier: String) -> [BSSelectableOption]
-    func multiSelectableView(view: BSMultiSelectableView, tokenViewForOption option: BSSelectableOption, atIndex index: Int) -> UIView
+    optional func selectableOptionsForSelectableViewWithIdentifier(identifier: String) -> [BSSelectableOption]
+    optional func multiSelectableView(view: BSMultiSelectableView, tokenViewForOption option: BSSelectableOption, atIndex index: Int) -> UIView
     
     optional func singleSelectableView(view: BSSingleSelectableView, didSelectOption option: BSSelectableOption)
     optional func multiSelectableView(view: BSMultiSelectableView, didSelectOption option: BSSelectableOption)
@@ -67,7 +67,7 @@ public class BSSelectableView: UIView {
         
         didSet {
             
-            options = delegate?.selectableOptionsForSelectableViewWithIdentifier(identifier) ?? []
+            options = delegate?.selectableOptionsForSelectableViewWithIdentifier?(identifier) ?? options
             (self as? BSMultiSelectableView)?.tokenView?.reloadData()
             (self as? BSMultiSelectableView)?.scrollTokenView?.reloadData()
             (self as? BSSingleSelectableView)?.setupLabel()
