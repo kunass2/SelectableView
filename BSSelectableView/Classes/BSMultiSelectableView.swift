@@ -8,7 +8,8 @@
 
 @IBDesignable public class BSMultiSelectableView: BSSelectableView, UITableViewDataSource, UITableViewDelegate, BSTokenViewDataSource {
     
-    @IBOutlet public var tokenView: BSTokenView!
+    @IBOutlet public var tokenView: BSTokenView?
+    @IBOutlet public var scrollTokenView: BSScrollTokenView?
     @IBOutlet public var tokenViewHeightConstraint: NSLayoutConstraint?
     
     public var selectedOptions = [BSSelectableOption]() {
@@ -26,7 +27,8 @@
             }
             
             selectedOptions.sortInPlace { $0.index <= $1.index }
-            tokenView.reloadData()
+            tokenView?.reloadData()
+            scrollTokenView?.reloadData()
         }
     }
     
@@ -41,7 +43,8 @@
         
         tableView.delegate = self
         tableView.dataSource = self
-        tokenView.dataSource = self
+        tokenView?.dataSource = self
+        scrollTokenView?.dataSource = self
     }
     
     //MARK: - Deinitialization
@@ -98,15 +101,15 @@
     
     //MARK: - BSTokenViewDataSource
     
-    func lineHeightForTokenInField(tokenField: BSTokenView) -> CGFloat {
+    func lineHeight() -> CGFloat {
         return delegate?.lineHeightForTokenInMultiSelectableView?() ?? 30
     }
     
-    func numberOfTokenInField(tokenField: BSTokenView) -> Int {
+    func numberOfTokens() -> Int {
         return selectedOptions.count
     }
     
-    func tokenField(tokenField: BSTokenView, viewForTokenAtIndex index: Int) -> UIView? {
+    func viewForTokenAtIndex(index: Int) -> UIView? {
         return delegate?.multiSelectableView(self, tokenViewForOption: selectedOptions[index], atIndex: index)
     }
     

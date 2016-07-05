@@ -68,7 +68,8 @@ public class BSSelectableView: UIView {
         didSet {
             
             options = delegate?.selectableOptionsForSelectableViewWithIdentifier(identifier) ?? []
-            (self as? BSMultiSelectableView)?.tokenView.reloadData()
+            (self as? BSMultiSelectableView)?.tokenView?.reloadData()
+            (self as? BSMultiSelectableView)?.scrollTokenView?.reloadData()
             (self as? BSSingleSelectableView)?.setupLabel()
         }
     }

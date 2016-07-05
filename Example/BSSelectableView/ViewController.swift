@@ -10,6 +10,7 @@ class ViewController: UIViewController, BSSelectableViewDelegate {
     
     @IBOutlet var selectableView: BSSingleSelectableView!
     @IBOutlet var multiselectableView: BSMultiSelectableView!
+    @IBOutlet var multiscrollselectableView: BSMultiSelectableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,7 @@ class ViewController: UIViewController, BSSelectableViewDelegate {
     
         selectableView.delegate = self
         multiselectableView.delegate = self
+        multiscrollselectableView.delegate = self
         
 //        selectableView.selectedOption = BSSelectableOption(index: 0, title: "First title", identifier: "a")
         multiselectableView.selectedOptions = [BSSelectableOption(index: 0, title: "First title", identifier: "a"), BSSelectableOption(index: 1, title: "aaa", identifier: "b")]

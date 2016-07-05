@@ -1,23 +1,12 @@
 //
-//  ZFTokenTextField.swift
-//  BSSelectableView
+//  BSScrollTokenView.swift
+//  Pods
 //
-//  Created by Amornchai Kanokpullwad on 10/11/2014.
-//  Simplified and rewritten in Swift by Bartłomiej Semańczyk and Piotr Pawluś
-//  Copyright (c) 2016 Bartłomiej Semańczyk. All rights reserved.
+//  Created by Bartłomiej Semańczyk on 05/07/16.
+//
 //
 
-@objc protocol BSTokenViewDataSource: class {
-    
-    optional func tokenMargin() -> CGFloat
-    func lineHeight() -> CGFloat
-    func numberOfTokens() -> Int
-    func viewForTokenAtIndex(index: Int) -> UIView?
-    func tokenViewDidRefreshWithHeight(height: CGFloat)
-    func textForPlaceholder() -> String
-}
-
-public class BSTokenView: UIControl {
+public class BSScrollTokenView: UIScrollView {
     
     weak var dataSource: BSTokenViewDataSource?
     
@@ -38,7 +27,7 @@ public class BSTokenView: UIControl {
         
         reloadData()
     }
-  
+    
     override public func awakeFromNib() {
         super.awakeFromNib()
         
@@ -77,14 +66,13 @@ public class BSTokenView: UIControl {
         
         if count == 0 {
             
-             let placeholderLabel = UILabel(frame: CGRect(x: CGFloat(BSSelectableView.leftPaddingForPlaceholderText), y: 0, width: frame.size.width, height: dataSource?.lineHeight() ?? 30))
+            let placeholderLabel = UILabel(frame: CGRect(x: CGFloat(BSSelectableView.leftPaddingForPlaceholderText), y: 0, width: frame.size.width, height: dataSource?.lineHeight() ?? 30))
             placeholderLabel.text = dataSource?.textForPlaceholder()
             placeholderLabel.textColor = BSSelectableView.textColorForPlaceholderText
             placeholderLabel.font = BSSelectableView.fontForPlaceholderText
             
             addSubview(placeholderLabel)
         }
-
     }
     
     //MARK: - Private
@@ -92,23 +80,13 @@ public class BSTokenView: UIControl {
     private func enumerateItemRectsUsingBlock(block: (CGRect) -> Void) {
         
         var x: CGFloat = 0
-        var y: CGFloat = 0
-
-        let lineHeight = dataSource?.lineHeight() ?? 0
         let margin = dataSource?.tokenMargin?() ?? 0
-
+        
         for token in tokenViews {
-
-            let width = max(CGRectGetWidth(bounds), CGRectGetWidth(token.frame))
+            
             let tokenWidth = min(CGRectGetWidth(bounds), CGRectGetWidth(token.frame))
             
-            if x > (width - tokenWidth) {
-                
-                y += lineHeight + margin
-                x = 0
-            }
-            
-            block(CGRect(x: x, y: y, width: tokenWidth, height: token.frame.size.height))
+            block(CGRect(x: x, y: 0, width: tokenWidth, height: token.frame.size.height))
             
             x += tokenWidth + margin
         }
@@ -120,7 +98,7 @@ public class BSTokenView: UIControl {
         super.layoutSubviews()
         
         invalidateIntrinsicContentSize()
-
+        
         var counter = 0
         
         enumerateItemRectsUsingBlock { frame in
@@ -140,7 +118,7 @@ public class BSTokenView: UIControl {
             dataSource?.tokenViewDidRefreshWithHeight(lineHeight)
             return CGSizeZero
         }
-
+        
         var totalRect = CGRectNull
         
         enumerateItemRectsUsingBlock { itemRect in
@@ -148,6 +126,7 @@ public class BSTokenView: UIControl {
         }
         
         dataSource?.tokenViewDidRefreshWithHeight(max(totalRect.size.height, lineHeight))
+        contentSize = CGSizeMake(totalRect.size.width, totalRect.size.height)
         
         return totalRect.size
     }
