@@ -8,7 +8,7 @@
 
 @IBDesignable public class BSSingleSelectableView: BSSelectableView, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet public var selectedOptionLabel: UILabel!
+    @IBOutlet public var selectedOptionLabel: UILabel?
     
     public var selectedOption: BSSelectableOption? {
         
@@ -24,7 +24,7 @@
     public override func awakeFromNib() {
         super.awakeFromNib()
         
-        switchButton.addTarget(self, action: #selector(switchButtonTapped), forControlEvents: .TouchUpInside)
+        switchButton?.addTarget(self, action: #selector(switchButtonTapped), forControlEvents: .TouchUpInside)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -45,22 +45,22 @@
     
     func setupLabel() {
         
-        selectedOptionLabel.numberOfLines = 0
-        selectedOptionLabel.adjustsFontSizeToFitWidth = true
-        selectedOptionLabel.minimumScaleFactor = 0.2
+        selectedOptionLabel?.numberOfLines = 0
+        selectedOptionLabel?.adjustsFontSizeToFitWidth = true
+        selectedOptionLabel?.minimumScaleFactor = 0.2
         tableView.reloadData()
         
         if selectedOption == nil {
             
-            selectedOptionLabel.text = placeholderText
-            selectedOptionLabel.font = BSSelectableView.fontForPlaceholderText
-            selectedOptionLabel.textColor = BSSelectableView.textColorForPlaceholderText
+            selectedOptionLabel?.text = placeholderText
+            selectedOptionLabel?.font = BSSelectableView.fontForPlaceholderText
+            selectedOptionLabel?.textColor = BSSelectableView.textColorForPlaceholderText
             
         } else {
             
-            selectedOptionLabel.text = selectedOption?.title
-            selectedOptionLabel.textColor = BSSelectableView.titleColorForOption
-            selectedOptionLabel.font = BSSelectableView.fontForOption
+            selectedOptionLabel?.text = selectedOption?.title
+            selectedOptionLabel?.textColor = BSSelectableView.titleColorForOption
+            selectedOptionLabel?.font = BSSelectableView.fontForOption
         }
     }
     

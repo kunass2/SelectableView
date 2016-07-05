@@ -59,9 +59,9 @@ public class BSSelectableView: UIView {
         }
     }
     
-    @IBOutlet public var switchButton: UIButton!
-    @IBOutlet public var contentOptionsHeightConstraint: NSLayoutConstraint!
-    @IBOutlet public var contentOptionsView: UIView!
+    @IBOutlet public var switchButton: UIButton?
+    @IBOutlet public var contentOptionsHeightConstraint: NSLayoutConstraint?
+    @IBOutlet public var contentOptionsView: UIView?
     
     weak public var delegate: BSSelectableViewDelegate? {
         
@@ -90,7 +90,10 @@ public class BSSelectableView: UIView {
         didSet {
             
             updateContentOptionsHeight()
-            delegate?.selectableViewToggledOptionsWithButton?(switchButton, expanded: expanded)
+            
+            if let switchButton = switchButton {
+                delegate?.selectableViewToggledOptionsWithButton?(switchButton, expanded: expanded)
+            }
         }
     }
     
@@ -111,15 +114,15 @@ public class BSSelectableView: UIView {
         let nib = UINib(nibName: "BSSelectableTableViewCell", bundle: NSBundle(forClass: BSSelectableTableViewCell.classForCoder()))
         tableView.registerNib(nib, forCellReuseIdentifier: BSSelectableTableViewCellIdentifier)
         
-        contentOptionsView.addSubview(tableView)
+        contentOptionsView?.addSubview(tableView)
         
         let topConstraint = NSLayoutConstraint(item: tableView, attribute: .Top, relatedBy: .Equal, toItem: contentOptionsView, attribute: .Top, multiplier: 1, constant: 0)
         let trailingConstraint = NSLayoutConstraint(item: tableView, attribute: .Trailing, relatedBy: .Equal, toItem: contentOptionsView, attribute: .Trailing, multiplier: 1, constant: 0)
         let bottomConstraint = NSLayoutConstraint(item: tableView, attribute: .Bottom, relatedBy: .Equal, toItem: contentOptionsView, attribute: .Bottom, multiplier: 1, constant: 0)
         let leadingConstraint = NSLayoutConstraint(item: tableView, attribute: .Leading, relatedBy: .Equal, toItem: contentOptionsView, attribute: .Leading, multiplier: 1, constant: 0)
         
-        contentOptionsView.addConstraints([topConstraint, trailingConstraint, bottomConstraint, leadingConstraint])
-        contentOptionsView.layoutIfNeeded()
+        contentOptionsView?.addConstraints([topConstraint, trailingConstraint, bottomConstraint, leadingConstraint])
+        contentOptionsView?.layoutIfNeeded()
     }
     
     //MARK: - Deinitialization
@@ -135,7 +138,7 @@ public class BSSelectableView: UIView {
     //MARK: - Internal
     
     func updateContentOptionsHeight() {
-        contentOptionsHeightConstraint.constant = expanded ? CGFloat(min((options.count) * BSSelectableView.heightForOption, maxNumberOfRows * BSSelectableView.heightForOption)) : 0
+        contentOptionsHeightConstraint?.constant = expanded ? CGFloat(min((options.count) * BSSelectableView.heightForOption, maxNumberOfRows * BSSelectableView.heightForOption)) : 0
     }
     
     //MARK: - Private

@@ -39,7 +39,7 @@
     public override func awakeFromNib() {
         super.awakeFromNib()
         
-        switchButton.addTarget(self, action: #selector(switchButtonTapped), forControlEvents: .TouchUpInside)
+        switchButton?.addTarget(self, action: #selector(switchButtonTapped), forControlEvents: .TouchUpInside)
         
         tableView.delegate = self
         tableView.dataSource = self

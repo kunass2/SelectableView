@@ -46,10 +46,10 @@ Simply add `BSSingleSelectableView` or `BSMultiSelectableView` as a subclass of 
 #### Connect following `@IBOutlets`:
 
 ```Swift
-@IBOutlet public var switchButton: UIButton!
-@IBOutlet public var contentOptionsHeightConstraint: NSLayoutConstraint!
-@IBOutlet public var contentOptionsView: UIView!
-@IBOutlet public var selectedOptionLabel: UILabel! //only BSSingleSelectableView
+@IBOutlet public var switchButton: UIButton?
+@IBOutlet public var contentOptionsHeightConstraint: NSLayoutConstraint?
+@IBOutlet public var contentOptionsView: UIView?
+@IBOutlet public var selectedOptionLabel: UILabel? //only BSSingleSelectableView
 @IBOutlet public var tokenView: BSTokenView? //only BSMultiSelectableView
 @IBOutlet public var scrollTokenView: BSScrollTokenView?  //only BSMultiSelectableView, horizontal direction only
 @IBOutlet public var tokenViewHeightConstraint: NSLayoutConstraint? //only BSMultiSelectableView, useful within UIScrollView
