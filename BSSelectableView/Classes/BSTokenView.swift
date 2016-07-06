@@ -9,8 +9,8 @@
 
 @objc protocol BSTokenViewDataSource: class {
     
-    optional func tokenMargin() -> CGFloat
-    func lineHeight() -> CGFloat
+    func marginForToken() -> CGFloat
+    func lineHeightForToken() -> CGFloat
     func numberOfTokens() -> Int
     func viewForTokenAtIndex(index: Int) -> UIView?
     func tokenViewDidRefreshWithHeight(height: CGFloat)
@@ -77,7 +77,7 @@ public class BSTokenView: UIControl {
         
         if count == 0 {
             
-             let placeholderLabel = UILabel(frame: CGRect(x: CGFloat(BSSelectableView.leftPaddingForPlaceholderText), y: 0, width: frame.size.width, height: dataSource?.lineHeight() ?? 30))
+             let placeholderLabel = UILabel(frame: CGRect(x: CGFloat(BSSelectableView.leftPaddingForPlaceholderText), y: 0, width: frame.size.width, height: dataSource?.lineHeightForToken() ?? 30))
             placeholderLabel.text = dataSource?.textForPlaceholder()
             placeholderLabel.textColor = BSSelectableView.textColorForPlaceholderText
             placeholderLabel.font = BSSelectableView.fontForPlaceholderText
@@ -94,8 +94,8 @@ public class BSTokenView: UIControl {
         var x: CGFloat = 0
         var y: CGFloat = 0
 
-        let lineHeight = dataSource?.lineHeight() ?? 0
-        let margin = dataSource?.tokenMargin?() ?? 0
+        let lineHeight = dataSource?.lineHeightForToken() ?? 30
+        let margin = dataSource?.marginForToken() ?? 0
 
         for token in tokenViews {
 
@@ -133,7 +133,7 @@ public class BSTokenView: UIControl {
     
     override public func intrinsicContentSize() -> CGSize {
         
-        let lineHeight = dataSource?.lineHeight() ?? 30
+        let lineHeight = dataSource?.lineHeightForToken() ?? 30
         
         if tokenViews.isEmpty {
             

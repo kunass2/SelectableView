@@ -101,7 +101,7 @@
     
     //MARK: - BSTokenViewDataSource
     
-    func lineHeight() -> CGFloat {
+    func lineHeightForToken() -> CGFloat {
         return delegate?.lineHeightForTokenInMultiSelectableView?() ?? 30
     }
     
@@ -121,5 +121,7 @@
         return placeholderText
     }
     
-    
+    func marginForToken() -> CGFloat {
+        return delegate?.marginForTokenInMultiSelectableView?() ?? 0
+    }
 }

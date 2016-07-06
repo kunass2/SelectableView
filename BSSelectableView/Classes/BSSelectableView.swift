@@ -29,6 +29,7 @@ public class BSSelectableOption: NSObject {
     optional func singleSelectableView(view: BSSingleSelectableView, didSelectOption option: BSSelectableOption)
     optional func multiSelectableView(view: BSMultiSelectableView, didSelectOption option: BSSelectableOption)
     optional func lineHeightForTokenInMultiSelectableView() -> CGFloat
+    optional func marginForTokenInMultiSelectableView() -> CGFloat
     optional func selectableViewToggledOptionsWithButton(button: UIButton, expanded: Bool)
 }
 
