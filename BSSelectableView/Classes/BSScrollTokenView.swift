@@ -66,7 +66,7 @@ public class BSScrollTokenView: UIScrollView {
         
         if count == 0 {
             
-            let placeholderLabel = UILabel(frame: CGRect(x: CGFloat(BSSelectableView.leftPaddingForPlaceholderText), y: 0, width: frame.size.width, height: dataSource?.lineHeight() ?? 30))
+            let placeholderLabel = UILabel(frame: CGRect(x: CGFloat(BSSelectableView.leftPaddingForPlaceholderText), y: 0, width: frame.size.width, height: dataSource?.lineHeightForToken() ?? 30))
             placeholderLabel.text = dataSource?.textForPlaceholder()
             placeholderLabel.textColor = BSSelectableView.textColorForPlaceholderText
             placeholderLabel.font = BSSelectableView.fontForPlaceholderText
@@ -80,7 +80,7 @@ public class BSScrollTokenView: UIScrollView {
     private func enumerateItemRectsUsingBlock(block: (CGRect) -> Void) {
         
         var x: CGFloat = 0
-        let margin = dataSource?.tokenMargin?() ?? 0
+        let margin = dataSource?.marginForToken() ?? 0
         
         for token in tokenViews {
             
@@ -111,7 +111,7 @@ public class BSScrollTokenView: UIScrollView {
     
     override public func intrinsicContentSize() -> CGSize {
         
-        let lineHeight = dataSource?.lineHeight() ?? 30
+        let lineHeight = dataSource?.lineHeightForToken() ?? 30
         
         if tokenViews.isEmpty {
             
