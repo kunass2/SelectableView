@@ -67,12 +67,10 @@ multiSelectableView.delegate = self
 ```Swift
 @objc public protocol BSSelectableViewDelegate {
     
-    optional func selectableOptionsForSelectableViewWithIdentifier(identifier: String) -> [BSSelectableOption]
     optional func multiSelectableView(view: BSMultiSelectableView, tokenViewForOption option: BSSelectableOption, atIndex index: Int) -> UIView
     
     optional func singleSelectableView(view: BSSingleSelectableView, didSelectOption option: BSSelectableOption)
     optional func multiSelectableView(view: BSMultiSelectableView, didSelectOption option: BSSelectableOption)
-    optional func lineHeightForTokenInMultiSelectableView() -> CGFloat //default is 30
     optional func selectableViewToggledOptionsWithButton(button: UIButton, expanded: Bool)
 }
 ```
@@ -81,32 +79,26 @@ multiSelectableView.delegate = self
 
 ```Swift
 @IBInspectable public var identifier: String = "" //to differentiate selectable views
+@IBInspectable public var tableViewAccessibilityIdentifier: String = ""
 @IBInspectable public var maxNumberOfRows: Int = 6 //while selecting rows
+@IBInspectable public var placeholder: String = ""
 @IBInspectable public var cornerRadius: CGFloat = 3 //no words needed
 ```
 
 #### You may also do some customizing (*the following are default*):
 
 ```Swift
-	BSSelectableView.tintColorForSelectedOption = UIColor.blueColor()
-    BSSelectableView.titleColorForSelectedOption = UIColor.greenColor()
-    BSSelectableView.titleColorForOption = UIColor.blackColor()
     BSSelectableView.fontForOption = UIFont.systemFontOfSize(16)
+    BSSelectableView.fontForPlaceholderText = UIFont.systemFontOfSize(14)
+
     BSSelectableView.leftPaddingForOption = 20
     BSSelectableView.heightForOption = 40
     BSSelectableView.leftPaddingForPlaceholderText = 0
-    BSSelectableView.fontForPlaceholderText = UIFont.systemFontOfSize(14)
+
+    BSSelectableView.tintColorForSelectedOption = UIColor.blueColor()
+    BSSelectableView.titleColorForSelectedOption = UIColor.greenColor()
+    BSSelectableView.titleColorForOption = UIColor.blackColor()
     BSSelectableView.textColorForPlaceholderText = UIColor.grayColor()
-```
-
-#### You may in case you need it, set some custom properties right into **Interface Builder**, the following are default:
-
-```Swift
-    @IBInspectable public var identifier: String = ""
-    @IBInspectable public var tableViewAccessibilityIdentifier: String = ""
-    @IBInspectable public var maxNumberOfRows: Int = 6
-    @IBInspectable public var placeholderText: String = ""
-    @IBInspectable public var cornerRadius: CGFloat = 3
 ```
 
 #### If you need you are able to call public instance methods:

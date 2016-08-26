@@ -6,7 +6,10 @@
 //  Copyright (c) 2016 Bartłomiej Semańczyk. All rights reserved.
 //
 
-@IBDesignable public class BSMultiSelectableView: BSSelectableView, UITableViewDataSource, UITableViewDelegate, BSTokenViewDataSource {
+@IBDesignable public class BSMultiSelectableView: BSSelectableView, UITableViewDataSource, UITableViewDelegate {
+    
+    @IBInspectable public var lineHeight: CGFloat = 30
+    @IBInspectable public var margin: CGFloat = 0
     
     @IBOutlet public var tokenView: BSTokenView?
     @IBOutlet public var scrollTokenView: BSScrollTokenView?
@@ -43,8 +46,12 @@
         
         tableView.delegate = self
         tableView.dataSource = self
-        tokenView?.dataSource = self
-        scrollTokenView?.dataSource = self
+        
+        tokenView?.multiselectableView = self
+        scrollTokenView?.multiselectableView = self
+        
+        tokenView?.reloadData()
+        scrollTokenView?.reloadData()
     }
     
     //MARK: - Deinitialization
@@ -57,6 +64,10 @@
     
     func switchButtonTapped(sender: UIButton) {
         expanded = !expanded
+    }
+    
+    func viewForTokenAtIndex(index: Int) -> UIView? {
+        return delegate?.multiSelectableView?(self, tokenViewForOption: selectedOptions[index], atIndex: index)
     }
     
     //MARK: - Private
@@ -75,10 +86,11 @@
         let option = options[indexPath.row]
         
         cell.titleLabel.text = option.title
-        cell.accessoryType = .None
         cell.titleLabel.font = BSSelectableView.fontForOption
         cell.titleLabel.textColor = BSSelectableView.titleColorForOption
         cell.leftPaddingConstraint.constant = CGFloat(BSSelectableView.leftPaddingForOption)
+        
+        cell.accessoryType = .None
         cell.layoutMargins = UIEdgeInsetsZero
         cell.selectionStyle = .None
         
@@ -97,31 +109,5 @@
         selectedOptions.append(selectedOption)
         
         delegate?.multiSelectableView?(self, didSelectOption: selectedOption)
-    }
-    
-    //MARK: - BSTokenViewDataSource
-    
-    func lineHeightForToken() -> CGFloat {
-        return delegate?.lineHeightForTokenInMultiSelectableView?() ?? 30
-    }
-    
-    func numberOfTokens() -> Int {
-        return selectedOptions.count
-    }
-    
-    func viewForTokenAtIndex(index: Int) -> UIView? {
-        return delegate?.multiSelectableView?(self, tokenViewForOption: selectedOptions[index], atIndex: index)
-    }
-    
-    func tokenViewDidRefreshWithHeight(height: CGFloat) {
-        tokenViewHeightConstraint?.constant = height
-    }
-    
-    func textForPlaceholder() -> String {
-        return placeholderText
-    }
-    
-    func marginForToken() -> CGFloat {
-        return delegate?.marginForTokenInMultiSelectableView?() ?? 0
     }
 }

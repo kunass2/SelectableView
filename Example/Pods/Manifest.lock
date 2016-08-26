@@ -1,0 +1,16 @@
+PODS:
+  - BSSelectableView (1.0.2)
+
+DEPENDENCIES:
+  - BSSelectableView (from `../`)
+
+EXTERNAL SOURCES:
+  BSSelectableView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  BSSelectableView: 58db0848eb7b7705d416cc7d1301b7d1bd1801e6
+
+PODFILE CHECKSUM: 6dcbfa8252dd7d102d8fd6775bd61a8ddfff7eb6
+
+COCOAPODS: 1.0.1

@@ -8,31 +8,14 @@
 
 public class BSScrollTokenView: UIScrollView {
     
-    weak var dataSource: BSTokenViewDataSource?
+    var multiselectableView: BSMultiSelectableView?
     
     private var tokenViews = [UIView]()
+    private var placeholderLabel = UILabel()
     
     //MARK: - Class Methods
     
     //MARK: - Initialization
-    
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        reloadData()
-    }
-    
-    override public init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        reloadData()
-    }
-    
-    override public func awakeFromNib() {
-        super.awakeFromNib()
-        
-        reloadData()
-    }
     
     //MARK: - Deinitialization
     
@@ -50,11 +33,11 @@ public class BSScrollTokenView: UIScrollView {
         
         tokenViews.removeAll()
         
-        let count = dataSource?.numberOfTokens() ?? 0
+        let count = multiselectableView?.selectedOptions.count ?? 0
         
         for index in 0..<count {
             
-            if let tokenView = dataSource?.viewForTokenAtIndex(index) {
+            if let tokenView = multiselectableView?.viewForTokenAtIndex(index) {
                 
                 tokenView.autoresizingMask = UIViewAutoresizing.None
                 addSubview(tokenView)
@@ -66,13 +49,17 @@ public class BSScrollTokenView: UIScrollView {
         
         if count == 0 {
             
-            let placeholderLabel = UILabel(frame: CGRect(x: CGFloat(BSSelectableView.leftPaddingForPlaceholderText), y: 0, width: frame.size.width, height: dataSource?.lineHeightForToken() ?? 30))
-            placeholderLabel.text = dataSource?.textForPlaceholder()
-            placeholderLabel.textColor = BSSelectableView.textColorForPlaceholderText
-            placeholderLabel.font = BSSelectableView.fontForPlaceholderText
-            
+            setupPlaceholderLabel()
             addSubview(placeholderLabel)
         }
+    }
+    
+    func setupPlaceholderLabel() {
+        
+        placeholderLabel.frame = CGRect(x: CGFloat(BSSelectableView.leftPaddingForPlaceholderText), y: 0, width: frame.size.width, height: multiselectableView?.lineHeight ?? 0)
+        placeholderLabel.text = multiselectableView?.placeholder
+        placeholderLabel.textColor = BSSelectableView.textColorForPlaceholderText
+        placeholderLabel.font = BSSelectableView.fontForPlaceholderText
     }
     
     //MARK: - Private
@@ -80,7 +67,7 @@ public class BSScrollTokenView: UIScrollView {
     private func enumerateItemRectsUsingBlock(block: (CGRect) -> Void) {
         
         var x: CGFloat = 0
-        let margin = dataSource?.marginForToken() ?? 0
+        let margin = multiselectableView?.margin ?? 0
         
         for token in tokenViews {
             
@@ -111,11 +98,11 @@ public class BSScrollTokenView: UIScrollView {
     
     override public func intrinsicContentSize() -> CGSize {
         
-        let lineHeight = dataSource?.lineHeightForToken() ?? 30
+        let lineHeight = multiselectableView?.lineHeight ?? 0
         
         if tokenViews.isEmpty {
             
-            dataSource?.tokenViewDidRefreshWithHeight(lineHeight)
+            multiselectableView?.tokenViewHeightConstraint?.constant = lineHeight
             return CGSizeZero
         }
         
@@ -125,7 +112,7 @@ public class BSScrollTokenView: UIScrollView {
             totalRect = CGRectUnion(itemRect, totalRect)
         }
         
-        dataSource?.tokenViewDidRefreshWithHeight(max(totalRect.size.height, lineHeight))
+        multiselectableView?.tokenViewHeightConstraint?.constant = max(totalRect.size.height, lineHeight)
         contentSize = CGSizeMake(totalRect.size.width, totalRect.size.height)
         
         return totalRect.size

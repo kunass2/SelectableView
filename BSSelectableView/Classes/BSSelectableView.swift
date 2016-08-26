@@ -23,13 +23,10 @@ public class BSSelectableOption: NSObject {
 
 @objc public protocol BSSelectableViewDelegate {
     
-    optional func selectableOptionsForSelectableViewWithIdentifier(identifier: String) -> [BSSelectableOption]
     optional func multiSelectableView(view: BSMultiSelectableView, tokenViewForOption option: BSSelectableOption, atIndex index: Int) -> UIView
     
     optional func singleSelectableView(view: BSSingleSelectableView, didSelectOption option: BSSelectableOption)
     optional func multiSelectableView(view: BSMultiSelectableView, didSelectOption option: BSSelectableOption)
-    optional func lineHeightForTokenInMultiSelectableView() -> CGFloat
-    optional func marginForTokenInMultiSelectableView() -> CGFloat
     optional func selectableViewToggledOptionsWithButton(button: UIButton, expanded: Bool)
 }
 
@@ -37,20 +34,31 @@ let BSSelectableTableViewCellIdentifier = "SelectableTableViewCellIdentifier"
 
 public class BSSelectableView: UIView {
     
+    static public var fontForOption = UIFont.systemFontOfSize(16)
+    static public var fontForPlaceholderText = UIFont.systemFontOfSize(14)
+    
+    static public var leftPaddingForPlaceholderText = 0
+    static public var leftPaddingForOption = 20
+    static public var heightForOption = 40
+    
     static public var tintColorForSelectedOption = UIColor.blueColor()
     static public var titleColorForSelectedOption = UIColor.greenColor()
     static public var titleColorForOption = UIColor.blackColor()
-    static public var fontForOption = UIFont.systemFontOfSize(16)
-    static public var leftPaddingForOption = 20
-    static public var heightForOption = 40
-    static public var leftPaddingForPlaceholderText = 0
-    static public var fontForPlaceholderText = UIFont.systemFontOfSize(14)
     static public var textColorForPlaceholderText = UIColor.grayColor()
     
     @IBInspectable public var identifier: String = ""
     @IBInspectable public var tableViewAccessibilityIdentifier: String = ""
     @IBInspectable public var maxNumberOfRows: Int = 6
-    @IBInspectable public var placeholderText: String = ""
+    @IBInspectable public var placeholder: String = "" {
+        
+        didSet {
+            
+            (self as? BSMultiSelectableView)?.tokenView?.setupPlaceholderLabel()
+            (self as? BSMultiSelectableView)?.scrollTokenView?.setupPlaceholderLabel()
+            (self as? BSSingleSelectableView)?.setupLabel()
+        }
+    }
+    
     @IBInspectable public var cornerRadius: CGFloat = 3 {
         
         didSet {
@@ -64,16 +72,7 @@ public class BSSelectableView: UIView {
     @IBOutlet public var contentOptionsHeightConstraint: NSLayoutConstraint?
     @IBOutlet public var contentOptionsView: UIView?
     
-    weak public var delegate: BSSelectableViewDelegate? {
-        
-        didSet {
-            
-            options = delegate?.selectableOptionsForSelectableViewWithIdentifier?(identifier) ?? options
-            (self as? BSMultiSelectableView)?.tokenView?.reloadData()
-            (self as? BSMultiSelectableView)?.scrollTokenView?.reloadData()
-            (self as? BSSingleSelectableView)?.setupLabel()
-        }
-    }
+    weak public var delegate: BSSelectableViewDelegate?
     
     public var options = [BSSelectableOption]() {
         
@@ -127,6 +126,10 @@ public class BSSelectableView: UIView {
             contentOptionsView.addConstraints([topConstraint, trailingConstraint, bottomConstraint, leadingConstraint])
             contentOptionsView.layoutIfNeeded()
         }
+        
+        (self as? BSMultiSelectableView)?.tokenView?.reloadData()
+        (self as? BSMultiSelectableView)?.scrollTokenView?.reloadData()
+        (self as? BSSingleSelectableView)?.setupLabel()
     }
     
     //MARK: - Deinitialization

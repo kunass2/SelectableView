@@ -36,17 +36,17 @@ class ViewController: UIViewController, BSSelectableViewDelegate {
         BSSelectableView.titleColorForSelectedOption = UIColor.redColor()
         BSSelectableView.leftPaddingForOption = 10
     
+        selectableView.options = options
         selectableView.delegate = self
+        
         multiselectableView.delegate = self
+        multiselectableView.options = options
+        
         multiscrollselectableView.options = options
-                multiscrollselectableView.delegate = self
+        multiscrollselectableView.delegate = self
         
 //        selectableView.selectedOption = BSSelectableOption(index: 0, title: "First title", identifier: "a")
         multiselectableView.selectedOptions = [BSSelectableOption(index: 0, title: "First title", identifier: "a"), BSSelectableOption(index: 1, title: "aaa", identifier: "b")]
-    }
-    
-    func selectableOptionsForSelectableViewWithIdentifier(identifier: String) -> [BSSelectableOption] {
-        return options
     }
     
     func multiSelectableView(view: BSMultiSelectableView, tokenViewForOption option: BSSelectableOption, atIndex index: Int) -> UIView {

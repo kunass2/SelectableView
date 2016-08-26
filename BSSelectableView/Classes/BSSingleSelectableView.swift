@@ -28,7 +28,6 @@
         
         tableView.delegate = self
         tableView.dataSource = self
-        options = delegate?.selectableOptionsForSelectableViewWithIdentifier?(identifier) ?? options
     }
     
     //MARK: - Deinitialization
@@ -52,15 +51,15 @@
         
         if selectedOption == nil {
             
-            selectedOptionLabel?.text = placeholderText
+            selectedOptionLabel?.text = placeholder
             selectedOptionLabel?.font = BSSelectableView.fontForPlaceholderText
             selectedOptionLabel?.textColor = BSSelectableView.textColorForPlaceholderText
             
         } else {
             
             selectedOptionLabel?.text = selectedOption?.title
-            selectedOptionLabel?.textColor = BSSelectableView.titleColorForOption
             selectedOptionLabel?.font = BSSelectableView.fontForOption
+            selectedOptionLabel?.textColor = BSSelectableView.titleColorForOption
         }
     }
     
@@ -80,11 +79,12 @@
         let option = options[indexPath.row]
         
         cell.titleLabel.text = option.title
-        cell.accessoryType = option.identifier == selectedOption?.identifier ? .Checkmark : .None
-        cell.tintColor = BSSelectableView.tintColorForSelectedOption
         cell.titleLabel.font = BSSelectableView.fontForOption
         cell.titleLabel.textColor = option.identifier == selectedOption?.identifier ? BSSelectableView.titleColorForSelectedOption : BSSelectableView.titleColorForOption
         cell.leftPaddingConstraint.constant = CGFloat(BSSelectableView.leftPaddingForOption)
+        
+        cell.accessoryType = option.identifier == selectedOption?.identifier ? .Checkmark : .None
+        cell.tintColor = BSSelectableView.tintColorForSelectedOption
         cell.layoutMargins = UIEdgeInsetsZero
         cell.selectionStyle = .None
         
