@@ -15,7 +15,7 @@ public class BSSelectableOption: NSObject {
     
     public var descendantOptions = [BSSelectableOption]()
     
-    public init(index: Int, title: String, identifier: String, userInfo: [String: AnyObject]?) {
+    public init(index: Int, title: String, identifier: String, userInfo: [String: AnyObject]? = nil) {
         
         self.index = index
         self.identifier = identifier

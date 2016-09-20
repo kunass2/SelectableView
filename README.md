@@ -123,13 +123,16 @@ public class BSSelectableOption: NSObject {
     public var index: Int
     public var identifier: String
     public var title: String
+    public var userInfo: [String: AnyObject]?
+    
     public var descendantOptions = [BSSelectableOption]()
     
-    public init(index: Int, title: String, identifier: String) {
+    public init(index: Int, title: String, identifier: String, userInfo: [String: AnyObject]? = nil) {
         
         self.index = index
         self.identifier = identifier
         self.title = title
+        self.userInfo = userInfo
     }
 }
 ```
