@@ -6,30 +6,30 @@
 //  Copyright (c) 2016 Bartłomiej Semańczyk. All rights reserved.
 //
 
-@IBDesignable public class BSMultiSelectableView: BSSelectableView, UITableViewDataSource, UITableViewDelegate {
+@IBDesignable open class BSMultiSelectableView: BSSelectableView, UITableViewDataSource, UITableViewDelegate {
     
-    @IBInspectable public var lineHeight: CGFloat = 30
-    @IBInspectable public var margin: CGFloat = 0
+    @IBInspectable open var lineHeight: CGFloat = 30
+    @IBInspectable open var margin: CGFloat = 0
     
-    @IBOutlet public var tokenView: BSTokenView?
-    @IBOutlet public var scrollTokenView: BSScrollTokenView?
-    @IBOutlet public var tokenViewHeightConstraint: NSLayoutConstraint?
+    @IBOutlet open var tokenView: BSTokenView?
+    @IBOutlet open var scrollTokenView: BSScrollTokenView?
+    @IBOutlet open var tokenViewHeightConstraint: NSLayoutConstraint?
     
-    public var selectedOptions = [BSSelectableOption]() {
+    open var selectedOptions = [BSSelectableOption]() {
         
         didSet {
             
             for selectedOption in selectedOptions {
                 
-                for (index, option) in options.enumerate() {
+                for (index, option) in options.enumerated() {
                     
                     if selectedOption.index == option.index {
-                        options.removeAtIndex(index)
+                        options.remove(at: index)
                     }
                 }
             }
             
-            selectedOptions.sortInPlace { $0.index <= $1.index }
+            selectedOptions.sort { $0.index <= $1.index }
             tokenView?.reloadData()
             scrollTokenView?.reloadData()
         }
@@ -39,10 +39,10 @@
     
     //MARK: - Initialization
     
-    public override func awakeFromNib() {
+    open override func awakeFromNib() {
         super.awakeFromNib()
         
-        switchButton?.addTarget(self, action: #selector(switchButtonTapped), forControlEvents: .TouchUpInside)
+        switchButton?.addTarget(self, action: #selector(switchButtonTapped), for: .touchUpInside)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -58,15 +58,15 @@
     
     //MARK: - Actions
     
-    //MARK: - Public
+    //MARK: - Open
     
     //MARK: - Internal
     
-    func switchButtonTapped(sender: UIButton) {
+    func switchButtonTapped(_ sender: UIButton) {
         expanded = !expanded
     }
     
-    func viewForTokenAtIndex(index: Int) -> UIView? {
+    func viewForTokenAtIndex(_ index: Int) -> UIView? {
         return delegate?.multiSelectableView?(self, tokenViewForOption: selectedOptions[index], atIndex: index)
     }
     
@@ -76,36 +76,36 @@
     
     //MARK: - UITableViewDataSource
     
-    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return options.count
     }
     
-    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(BSSelectableTableViewCellIdentifier, forIndexPath: indexPath) as! BSSelectableTableViewCell
-        let option = options[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: BSSelectableTableViewCellIdentifier, for: indexPath) as! BSSelectableTableViewCell
+        let option = options[(indexPath as NSIndexPath).row]
         
         cell.titleLabel.text = option.title
         cell.titleLabel.font = BSSelectableView.fontForOption
         cell.titleLabel.textColor = BSSelectableView.titleColorForOption
         cell.leftPaddingConstraint.constant = CGFloat(BSSelectableView.leftPaddingForOption)
         
-        cell.accessoryType = .None
-        cell.layoutMargins = UIEdgeInsetsZero
-        cell.selectionStyle = .None
+        cell.accessoryType = .none
+        cell.layoutMargins = UIEdgeInsets.zero
+        cell.selectionStyle = .none
         
         return cell
     }
     
-    public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(BSSelectableView.heightForOption)
     }
     
     //MARK: - UITableViewDelegate
     
-    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let selectedOption = options[indexPath.row]
+        let selectedOption = options[(indexPath as NSIndexPath).row]
         selectedOptions.append(selectedOption)
         
         delegate?.multiSelectableView?(self, didSelectOption: selectedOption)

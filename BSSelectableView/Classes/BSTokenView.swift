@@ -7,7 +7,7 @@
 //  Copyright (c) 2016 Bartłomiej Semańczyk. All rights reserved.
 //
 
-public class BSTokenView: UIControl {
+open class BSTokenView: UIControl {
     
     var multiselectableView: BSMultiSelectableView?
     
@@ -22,7 +22,7 @@ public class BSTokenView: UIControl {
     
     //MARK: - Actions
     
-    //MARK: - Public
+    //MARK: - Open
     
     //MARK: - Internal
     
@@ -40,7 +40,7 @@ public class BSTokenView: UIControl {
             
             if let tokenView = multiselectableView?.viewForTokenAtIndex(index) {
                 
-                tokenView.autoresizingMask = UIViewAutoresizing.None
+                tokenView.autoresizingMask = UIViewAutoresizing()
                 addSubview(tokenView)
                 tokenViews.append(tokenView)
             }
@@ -65,7 +65,7 @@ public class BSTokenView: UIControl {
     
     //MARK: - Private
     
-    private func enumerateItemRectsUsingBlock(block: (CGRect) -> Void) {
+    private func enumerateItemRectsUsingBlock(_ block: (CGRect) -> Void) {
         
         var x: CGFloat = 0
         var y: CGFloat = 0
@@ -75,8 +75,8 @@ public class BSTokenView: UIControl {
 
         for token in tokenViews {
 
-            let width = max(CGRectGetWidth(bounds), CGRectGetWidth(token.frame))
-            let tokenWidth = min(CGRectGetWidth(bounds), CGRectGetWidth(token.frame))
+            let width = max(bounds.width, token.frame.width)
+            let tokenWidth = min(bounds.width, token.frame.width)
             
             if x > (width - tokenWidth) {
                 
@@ -92,7 +92,7 @@ public class BSTokenView: UIControl {
     
     //MARK: - Overridden
     
-    override public func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         
         invalidateIntrinsicContentSize()
@@ -107,20 +107,20 @@ public class BSTokenView: UIControl {
         }
     }
     
-    override public func intrinsicContentSize() -> CGSize {
+    override open var intrinsicContentSize : CGSize {
         
         let lineHeight = multiselectableView?.lineHeight ?? 0
         
         if tokenViews.isEmpty {
             
             multiselectableView?.tokenViewHeightConstraint?.constant = lineHeight
-            return CGSizeZero
+            return CGSize.zero
         }
 
-        var totalRect = CGRectNull
+        var totalRect = CGRect.null
         
         enumerateItemRectsUsingBlock { itemRect in
-            totalRect = CGRectUnion(itemRect, totalRect)
+            totalRect = itemRect.union(totalRect)
         }
         
         multiselectableView?.tokenViewHeightConstraint?.constant = max(totalRect.size.height, lineHeight)

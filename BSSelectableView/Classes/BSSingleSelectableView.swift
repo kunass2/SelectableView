@@ -6,11 +6,11 @@
 //  Copyright (c) 2016 Bartłomiej Semańczyk. All rights reserved.
 //
 
-@IBDesignable public class BSSingleSelectableView: BSSelectableView, UITableViewDataSource, UITableViewDelegate {
+@IBDesignable open class BSSingleSelectableView: BSSelectableView, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet public var selectedOptionLabel: UILabel?
+    @IBOutlet open var selectedOptionLabel: UILabel?
     
-    public var selectedOption: BSSelectableOption? {
+    open var selectedOption: BSSelectableOption? {
         
         didSet {
             setupLabel()
@@ -21,10 +21,10 @@
     
     //MARK: - Initialization
     
-    public override func awakeFromNib() {
+    open override func awakeFromNib() {
         super.awakeFromNib()
         
-        switchButton?.addTarget(self, action: #selector(switchButtonTapped), forControlEvents: .TouchUpInside)
+        switchButton?.addTarget(self, action: #selector(switchButtonTapped), for: .touchUpInside)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -34,11 +34,11 @@
     
     //MARK: - Actions
     
-    func switchButtonTapped(sender: UIButton) {
+    func switchButtonTapped(_ sender: UIButton) {
         expanded = !expanded
     }
     
-    //MARK: - Public
+    //MARK: - Open
     
     //MARK: - Internal
     
@@ -69,37 +69,37 @@
     
     //MARK: - UITableViewDataSource
     
-    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return options.count ?? 0
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return options.count
     }
     
-    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(BSSelectableTableViewCellIdentifier, forIndexPath: indexPath) as! BSSelectableTableViewCell
-        let option = options[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: BSSelectableTableViewCellIdentifier, for: indexPath) as! BSSelectableTableViewCell
+        let option = options[(indexPath as NSIndexPath).row]
         
         cell.titleLabel.text = option.title
         cell.titleLabel.font = BSSelectableView.fontForOption
         cell.titleLabel.textColor = option.identifier == selectedOption?.identifier ? BSSelectableView.titleColorForSelectedOption : BSSelectableView.titleColorForOption
         cell.leftPaddingConstraint.constant = CGFloat(BSSelectableView.leftPaddingForOption)
         
-        cell.accessoryType = option.identifier == selectedOption?.identifier ? .Checkmark : .None
+        cell.accessoryType = option.identifier == selectedOption?.identifier ? .checkmark : .none
         cell.tintColor = BSSelectableView.tintColorForSelectedOption
-        cell.layoutMargins = UIEdgeInsetsZero
-        cell.selectionStyle = .None
+        cell.layoutMargins = UIEdgeInsets.zero
+        cell.selectionStyle = .none
         
         return cell
     }
     
-    public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(BSSelectableView.heightForOption)
     }
     
     //MARK: - UITableViewDelegate
     
-    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        selectedOption = options[indexPath.row]
+        selectedOption = options[(indexPath as NSIndexPath).row]
         expanded = false
         delegate?.singleSelectableView?(self, didSelectOption: selectedOption!)
     }

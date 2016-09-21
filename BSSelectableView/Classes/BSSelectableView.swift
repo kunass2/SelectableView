@@ -6,14 +6,14 @@
 //  Copyright (c) 2016 Bartłomiej Semańczyk. All rights reserved.
 //
 
-public class BSSelectableOption: NSObject {
+open class BSSelectableOption: NSObject {
     
-    public var index: Int
-    public var identifier: String
-    public var title: String
-    public var userInfo: [String: AnyObject]?
+    open var index: Int
+    open var identifier: String
+    open var title: String
+    open var userInfo: [String: AnyObject]?
     
-    public var descendantOptions = [BSSelectableOption]()
+    open var descendantOptions = [BSSelectableOption]()
     
     public init(index: Int, title: String, identifier: String, userInfo: [String: AnyObject]? = nil) {
         
@@ -26,33 +26,33 @@ public class BSSelectableOption: NSObject {
 
 @objc public protocol BSSelectableViewDelegate {
     
-    optional func multiSelectableView(view: BSMultiSelectableView, tokenViewForOption option: BSSelectableOption, atIndex index: Int) -> UIView
+    @objc optional func multiSelectableView(_ view: BSMultiSelectableView, tokenViewForOption option: BSSelectableOption, atIndex index: Int) -> UIView
     
-    optional func singleSelectableView(view: BSSingleSelectableView, didSelectOption option: BSSelectableOption)
-    optional func multiSelectableView(view: BSMultiSelectableView, didSelectOption option: BSSelectableOption)
-    optional func selectableViewToggledOptionsWithButton(button: UIButton, expanded: Bool)
+    @objc optional func singleSelectableView(_ view: BSSingleSelectableView, didSelectOption option: BSSelectableOption)
+    @objc optional func multiSelectableView(_ view: BSMultiSelectableView, didSelectOption option: BSSelectableOption)
+    @objc optional func selectableViewToggledOptions(withButton: UIButton, expanded: Bool)
 }
 
 let BSSelectableTableViewCellIdentifier = "SelectableTableViewCellIdentifier"
 
-public class BSSelectableView: UIView {
+open class BSSelectableView: UIView {
     
-    static public var fontForOption = UIFont.systemFontOfSize(16)
-    static public var fontForPlaceholderText = UIFont.systemFontOfSize(14)
+    static open var fontForOption = UIFont.systemFont(ofSize: 16)
+    static open var fontForPlaceholderText = UIFont.systemFont(ofSize: 14)
     
-    static public var leftPaddingForPlaceholderText = 0
-    static public var leftPaddingForOption = 20
-    static public var heightForOption = 40
+    static open var leftPaddingForPlaceholderText = 0
+    static open var leftPaddingForOption = 20
+    static open var heightForOption = 40
     
-    static public var tintColorForSelectedOption = UIColor.blueColor()
-    static public var titleColorForSelectedOption = UIColor.greenColor()
-    static public var titleColorForOption = UIColor.blackColor()
-    static public var textColorForPlaceholderText = UIColor.grayColor()
+    static open var tintColorForSelectedOption = UIColor.blue
+    static open var titleColorForSelectedOption = UIColor.green
+    static open var titleColorForOption = UIColor.black
+    static open var textColorForPlaceholderText = UIColor.gray
     
-    @IBInspectable public var identifier: String = ""
-    @IBInspectable public var tableViewAccessibilityIdentifier: String = ""
-    @IBInspectable public var maxNumberOfRows: Int = 6
-    @IBInspectable public var placeholder: String = "" {
+    @IBInspectable open var identifier: String = ""
+    @IBInspectable open var tableViewAccessibilityIdentifier: String = ""
+    @IBInspectable open var maxNumberOfRows: Int = 6
+    @IBInspectable open var placeholder: String = "" {
         
         didSet {
             
@@ -62,7 +62,7 @@ public class BSSelectableView: UIView {
         }
     }
     
-    @IBInspectable public var cornerRadius: CGFloat = 3 {
+    @IBInspectable open var cornerRadius: CGFloat = 3 {
         
         didSet {
             
@@ -71,17 +71,17 @@ public class BSSelectableView: UIView {
         }
     }
     
-    @IBOutlet public var switchButton: UIButton?
-    @IBOutlet public var contentOptionsHeightConstraint: NSLayoutConstraint?
-    @IBOutlet public var contentOptionsView: UIView?
+    @IBOutlet open var switchButton: UIButton?
+    @IBOutlet open var contentOptionsHeightConstraint: NSLayoutConstraint?
+    @IBOutlet open var contentOptionsView: UIView?
     
-    weak public var delegate: BSSelectableViewDelegate?
+    weak open var delegate: BSSelectableViewDelegate?
     
-    public var options = [BSSelectableOption]() {
+    open var options = [BSSelectableOption]() {
         
         didSet {
             
-            options.sortInPlace { $0.index <= $1.index }
+            options.sort { $0.index <= $1.index }
             tableView.reloadData()
             updateContentOptionsHeight()
         }
@@ -95,7 +95,7 @@ public class BSSelectableView: UIView {
             updateContentOptionsHeight()
             
             if let switchButton = switchButton {
-                delegate?.selectableViewToggledOptionsWithButton?(switchButton, expanded: expanded)
+                delegate?.selectableViewToggledOptions?(withButton: switchButton, expanded: expanded)
             }
         }
     }
@@ -104,27 +104,27 @@ public class BSSelectableView: UIView {
     
     //MARK: - Initialization
     
-    public override func awakeFromNib() {
+    open override func awakeFromNib() {
         super.awakeFromNib()
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.bounces = false
         tableView.rowHeight = 40
-        tableView.separatorInset = UIEdgeInsetsZero
-        tableView.layoutMargins = UIEdgeInsetsZero
+        tableView.separatorInset = UIEdgeInsets.zero
+        tableView.layoutMargins = UIEdgeInsets.zero
         tableView.accessibilityIdentifier = tableViewAccessibilityIdentifier
         
-        let nib = UINib(nibName: "BSSelectableTableViewCell", bundle: NSBundle(forClass: BSSelectableTableViewCell.classForCoder()))
-        tableView.registerNib(nib, forCellReuseIdentifier: BSSelectableTableViewCellIdentifier)
+        let nib = UINib(nibName: "BSSelectableTableViewCell", bundle: Bundle(for: BSSelectableTableViewCell.classForCoder()))
+        tableView.register(nib, forCellReuseIdentifier: BSSelectableTableViewCellIdentifier)
         
         if let contentOptionsView = contentOptionsView {
             
             contentOptionsView.addSubview(tableView)
             
-            let topConstraint = NSLayoutConstraint(item: tableView, attribute: .Top, relatedBy: .Equal, toItem: contentOptionsView, attribute: .Top, multiplier: 1, constant: 0)
-            let trailingConstraint = NSLayoutConstraint(item: tableView, attribute: .Trailing, relatedBy: .Equal, toItem: contentOptionsView, attribute: .Trailing, multiplier: 1, constant: 0)
-            let bottomConstraint = NSLayoutConstraint(item: tableView, attribute: .Bottom, relatedBy: .Equal, toItem: contentOptionsView, attribute: .Bottom, multiplier: 1, constant: 0)
-            let leadingConstraint = NSLayoutConstraint(item: tableView, attribute: .Leading, relatedBy: .Equal, toItem: contentOptionsView, attribute: .Leading, multiplier: 1, constant: 0)
+            let topConstraint = NSLayoutConstraint(item: tableView, attribute: .top, relatedBy: .equal, toItem: contentOptionsView, attribute: .top, multiplier: 1, constant: 0)
+            let trailingConstraint = NSLayoutConstraint(item: tableView, attribute: .trailing, relatedBy: .equal, toItem: contentOptionsView, attribute: .trailing, multiplier: 1, constant: 0)
+            let bottomConstraint = NSLayoutConstraint(item: tableView, attribute: .bottom, relatedBy: .equal, toItem: contentOptionsView, attribute: .bottom, multiplier: 1, constant: 0)
+            let leadingConstraint = NSLayoutConstraint(item: tableView, attribute: .leading, relatedBy: .equal, toItem: contentOptionsView, attribute: .leading, multiplier: 1, constant: 0)
             
             contentOptionsView.addConstraints([topConstraint, trailingConstraint, bottomConstraint, leadingConstraint])
             contentOptionsView.layoutIfNeeded()
@@ -139,9 +139,9 @@ public class BSSelectableView: UIView {
     
     //MARK: - Actions
     
-    //MARK: - Public
+    //MARK: - Open
     
-    public func hideOptions() {
+    open func hideOptions() {
         expanded = false
     }
     

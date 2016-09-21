@@ -6,7 +6,7 @@
 //
 //
 
-public class BSScrollTokenView: UIScrollView {
+open class BSScrollTokenView: UIScrollView {
     
     var multiselectableView: BSMultiSelectableView?
     
@@ -21,7 +21,7 @@ public class BSScrollTokenView: UIScrollView {
     
     //MARK: - Actions
     
-    //MARK: - Public
+    //MARK: - Open
     
     //MARK: - Internal
     
@@ -39,7 +39,7 @@ public class BSScrollTokenView: UIScrollView {
             
             if let tokenView = multiselectableView?.viewForTokenAtIndex(index) {
                 
-                tokenView.autoresizingMask = UIViewAutoresizing.None
+                tokenView.autoresizingMask = UIViewAutoresizing()
                 addSubview(tokenView)
                 tokenViews.append(tokenView)
             }
@@ -64,14 +64,14 @@ public class BSScrollTokenView: UIScrollView {
     
     //MARK: - Private
     
-    private func enumerateItemRectsUsingBlock(block: (CGRect) -> Void) {
+    private func enumerateItemRectsUsingBlock(_ block: (CGRect) -> Void) {
         
         var x: CGFloat = 0
         let margin = multiselectableView?.margin ?? 0
         
         for token in tokenViews {
             
-            let tokenWidth = min(CGRectGetWidth(bounds), CGRectGetWidth(token.frame))
+            let tokenWidth = min(bounds.width, token.frame.width)
             
             block(CGRect(x: x, y: 0, width: tokenWidth, height: token.frame.size.height))
             
@@ -81,7 +81,7 @@ public class BSScrollTokenView: UIScrollView {
     
     //MARK: - Overridden
     
-    override public func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         
         invalidateIntrinsicContentSize()
@@ -96,24 +96,24 @@ public class BSScrollTokenView: UIScrollView {
         }
     }
     
-    override public func intrinsicContentSize() -> CGSize {
+    override open var intrinsicContentSize : CGSize {
         
         let lineHeight = multiselectableView?.lineHeight ?? 0
         
         if tokenViews.isEmpty {
             
             multiselectableView?.tokenViewHeightConstraint?.constant = lineHeight
-            return CGSizeZero
+            return CGSize.zero
         }
         
-        var totalRect = CGRectNull
+        var totalRect = CGRect.null
         
         enumerateItemRectsUsingBlock { itemRect in
-            totalRect = CGRectUnion(itemRect, totalRect)
+            totalRect = itemRect.union(totalRect)
         }
         
         multiselectableView?.tokenViewHeightConstraint?.constant = max(totalRect.size.height, lineHeight)
-        contentSize = CGSizeMake(totalRect.size.width, totalRect.size.height)
+        contentSize = CGSize(width: totalRect.size.width, height: totalRect.size.height)
         
         return totalRect.size
     }

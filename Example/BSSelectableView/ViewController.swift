@@ -33,7 +33,7 @@ class ViewController: UIViewController, BSSelectableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        BSSelectableView.titleColorForSelectedOption = UIColor.redColor()
+        BSSelectableView.titleColorForSelectedOption = UIColor.red
         BSSelectableView.leftPaddingForOption = 10
     
         selectableView.options = options
@@ -49,17 +49,17 @@ class ViewController: UIViewController, BSSelectableViewDelegate {
         multiselectableView.selectedOptions = [BSSelectableOption(index: 0, title: "First title", identifier: "a"), BSSelectableOption(index: 1, title: "aaa", identifier: "b")]
     }
     
-    func multiSelectableView(view: BSMultiSelectableView, tokenViewForOption option: BSSelectableOption, atIndex index: Int) -> UIView {
+    func multiSelectableView(_ view: BSMultiSelectableView, tokenViewForOption option: BSSelectableOption, atIndex index: Int) -> UIView {
         
-        let tokenView = NSBundle.mainBundle().loadNibNamed("BSSelectedTokenFieldView", owner: self, options: nil).first as! BSSelectedTokenFieldView
+        let tokenView = Bundle.main.loadNibNamed("BSSelectedTokenFieldView", owner: self, options: nil)?.first as! BSSelectedTokenFieldView
         tokenView.titleLabel.text = option.title
         tokenView.titleLabel.sizeToFit()
-        tokenView.frame = CGRectMake(0, 0, min(tokenView.titleLabel.frame.size.width + 50, 200), 30)
+        tokenView.frame = CGRect(x: 0, y: 0, width: min(tokenView.titleLabel.frame.size.width + 50, 200), height: 30)
         
         tokenView.performHandler = {
             
             view.options.append(option)
-            view.selectedOptions.removeAtIndex(index)
+            view.selectedOptions.remove(at: index)
         }
         
         return tokenView
