@@ -67,11 +67,11 @@ multiSelectableView.delegate = self
 ```Swift
 @objc public protocol BSSelectableViewDelegate {
     
-    optional func multiSelectableView(view: BSMultiSelectableView, tokenViewForOption option: BSSelectableOption, atIndex index: Int) -> UIView
+    optional func multiSelectableView(_ view: BSMultiSelectableView, tokenViewFor option: BSSelectableOption, at index: Int) -> UIView
     
-    optional func singleSelectableView(view: BSSingleSelectableView, didSelectOption option: BSSelectableOption)
-    optional func multiSelectableView(view: BSMultiSelectableView, didSelectOption option: BSSelectableOption)
-    optional func selectableViewToggledOptionsWithButton(button: UIButton, expanded: Bool)
+    optional func singleSelectableView(_ view: BSSingleSelectableView, didSelect option: BSSelectableOption)
+    optional func multiSelectableView(_ view: BSMultiSelectableView, didSelect option: BSSelectableOption)
+    optional func selectableViewDidToggleOptions(with button: UIButton, expanded: Bool)
 }
 ```
 
@@ -123,11 +123,11 @@ public class BSSelectableOption: NSObject {
     public var index: Int
     public var identifier: String
     public var title: String
-    public var userInfo: [String: AnyObject]?
+    public var userInfo: [AnyHashable: Any]?
     
     public var descendantOptions = [BSSelectableOption]()
     
-    public init(index: Int, title: String, identifier: String, userInfo: [String: AnyObject]? = nil) {
+    public init(index: Int, title: String, identifier: String, userInfo: [AnyHashable: Any]? = nil) {
         
         self.index = index
         self.identifier = identifier

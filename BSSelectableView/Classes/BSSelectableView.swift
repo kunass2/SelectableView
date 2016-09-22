@@ -11,11 +11,11 @@ open class BSSelectableOption: NSObject {
     open var index: Int
     open var identifier: String
     open var title: String
-    open var userInfo: [String: AnyObject]?
+    open var userInfo: [AnyHashable: Any]?
     
     open var descendantOptions = [BSSelectableOption]()
     
-    public init(index: Int, title: String, identifier: String, userInfo: [String: AnyObject]? = nil) {
+    public init(index: Int, title: String, identifier: String, userInfo: [AnyHashable: Any]? = nil) {
         
         self.index = index
         self.identifier = identifier
@@ -26,11 +26,11 @@ open class BSSelectableOption: NSObject {
 
 @objc public protocol BSSelectableViewDelegate {
     
-    @objc optional func multiSelectableView(_ view: BSMultiSelectableView, tokenViewForOption option: BSSelectableOption, atIndex index: Int) -> UIView
+    @objc optional func multiSelectableView(_ view: BSMultiSelectableView, tokenViewFor option: BSSelectableOption, at index: Int) -> UIView
     
-    @objc optional func singleSelectableView(_ view: BSSingleSelectableView, didSelectOption option: BSSelectableOption)
-    @objc optional func multiSelectableView(_ view: BSMultiSelectableView, didSelectOption option: BSSelectableOption)
-    @objc optional func selectableViewToggledOptions(withButton: UIButton, expanded: Bool)
+    @objc optional func singleSelectableView(_ view: BSSingleSelectableView, didSelect option: BSSelectableOption)
+    @objc optional func multiSelectableView(_ view: BSMultiSelectableView, didSelect option: BSSelectableOption)
+    @objc optional func selectableViewDidToggleOptions(with button: UIButton, expanded: Bool)
 }
 
 let BSSelectableTableViewCellIdentifier = "SelectableTableViewCellIdentifier"
@@ -95,7 +95,7 @@ open class BSSelectableView: UIView {
             updateContentOptionsHeight()
             
             if let switchButton = switchButton {
-                delegate?.selectableViewToggledOptions?(withButton: switchButton, expanded: expanded)
+                delegate?.selectableViewDidToggleOptions?(with: switchButton, expanded: expanded)
             }
         }
     }

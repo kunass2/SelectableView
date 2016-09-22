@@ -49,7 +49,7 @@ class ViewController: UIViewController, BSSelectableViewDelegate {
         multiselectableView.selectedOptions = [BSSelectableOption(index: 0, title: "First title", identifier: "a"), BSSelectableOption(index: 1, title: "aaa", identifier: "b")]
     }
     
-    func multiSelectableView(_ view: BSMultiSelectableView, tokenViewForOption option: BSSelectableOption, atIndex index: Int) -> UIView {
+    func multiSelectableView(_ view: BSMultiSelectableView, tokenViewFor option: BSSelectableOption, at index: Int) -> UIView {
         
         let tokenView = Bundle.main.loadNibNamed("BSSelectedTokenFieldView", owner: self, options: nil)?.first as! BSSelectedTokenFieldView
         tokenView.titleLabel.text = option.title

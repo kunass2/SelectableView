@@ -101,6 +101,6 @@
         
         selectedOption = options[(indexPath as NSIndexPath).row]
         expanded = false
-        delegate?.singleSelectableView?(self, didSelectOption: selectedOption!)
+        delegate?.singleSelectableView?(self, didSelect: selectedOption!)
     }
 }

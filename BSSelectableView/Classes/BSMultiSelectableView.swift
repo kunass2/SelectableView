@@ -67,7 +67,7 @@
     }
     
     func viewForTokenAtIndex(_ index: Int) -> UIView? {
-        return delegate?.multiSelectableView?(self, tokenViewForOption: selectedOptions[index], atIndex: index)
+        return delegate?.multiSelectableView?(self, tokenViewFor: selectedOptions[index], at: index)
     }
     
     //MARK: - Private
@@ -108,6 +108,6 @@
         let selectedOption = options[(indexPath as NSIndexPath).row]
         selectedOptions.append(selectedOption)
         
-        delegate?.multiSelectableView?(self, didSelectOption: selectedOption)
+        delegate?.multiSelectableView?(self, didSelect: selectedOption)
     }
 }
