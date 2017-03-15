@@ -1,4 +1,4 @@
-# BSSelectableView
+# SelectableView
 
 ![](Assets/1.png)
 ![](Assets/2.png)
@@ -9,17 +9,17 @@
 
 ## Installation
 
-`BSSelectableView` is available through [CocoaPods](https://cocoapods.org/pods/BSSelectableView). To install
+`SelectableView` is available through [CocoaPods](https://cocoapods.org/pods/SelectableView). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "BSSelectableView"
+pod "SelectableView"
 ```
 
 If you used `use_framework` in your podfile just simply do:
 
 ```Swift
-import BSSelectableView
+import SelectableView
 
 ```
 
@@ -28,7 +28,7 @@ for every file when you need to use it.
 you may also use:
 
 ```Swift
-@import BSSelectableView;
+@import SelectableView;
 
 ```
 
@@ -41,18 +41,19 @@ within **bridging header** file and avoid to import framework for every needed f
 
 ##Usage
 
-Simply add `BSSingleSelectableView` or `BSMultiSelectableView` as a subclass of your `UIView` in Interface Builder.
+Simply add `SingleSelectableView`, `MultiSelectableView` or `SearchSelectableView` as a subclass of your `UIView` in Interface Builder.
 
 #### Connect following `@IBOutlets`:
 
 ```Swift
-@IBOutlet public var switchButton: UIButton?
-@IBOutlet public var contentOptionsHeightConstraint: NSLayoutConstraint?
-@IBOutlet public var contentOptionsView: UIView?
-@IBOutlet public var selectedOptionLabel: UILabel? //only BSSingleSelectableView
-@IBOutlet public var tokenView: BSTokenView? //only BSMultiSelectableView
-@IBOutlet public var scrollTokenView: BSScrollTokenView?  //only BSMultiSelectableView, horizontal direction only
-@IBOutlet public var tokenViewHeightConstraint: NSLayoutConstraint? //only BSMultiSelectableView, useful within UIScrollView
+@IBOutlet open var switchButton: UIButton?
+@IBOutlet open var contentOptionsHeightConstraint: NSLayoutConstraint?
+@IBOutlet open var contentOptionsView: UIView?
+@IBOutlet open var selectedOptionLabel: UILabel? //only SingleSelectableView
+@IBOutlet open var verticalTokenView: VerticalTokenView? //only MultiSelectableView
+@IBOutlet open var horizontalTokenView: HorizontalTokenView?  //only MultiSelectableView
+@IBOutlet open var tokenViewHeightConstraint: NSLayoutConstraint? //only MultiSelectableView, useful within UIScrollView
+@IBOutlet open var textField: UITextField! //only SearchSelectableView
 ```
 
 #### Assing delegates for your selectable views in `viewDidLoad()`:
@@ -60,72 +61,71 @@ Simply add `BSSingleSelectableView` or `BSMultiSelectableView` as a subclass of 
 ```Swift
 singleSelectableView.delegate = self
 multiSelectableView.delegate = self
+searchSelectableView.delegate = self
 ```
 
-#### Conform your `UIViewController` to `BSSelectableViewDelegate` declared as following:
+#### Conform your `UIViewController` to `SelectableViewDelegate` declared as following:
 
 ```Swift
-@objc public protocol BSSelectableViewDelegate {
+@objc public protocol SelectableViewDelegate {
     
-    optional func multiSelectableView(_ view: BSMultiSelectableView, tokenViewFor option: BSSelectableOption, at index: Int) -> UIView
+    @objc optional func multiSelectableView(_ view: MultiSelectableView, tokenViewFor option: SelectableOption) -> UIView
     
-    optional func singleSelectableView(_ view: BSSingleSelectableView, didSelect option: BSSelectableOption)
-    optional func multiSelectableView(_ view: BSMultiSelectableView, didSelect option: BSSelectableOption)
-    optional func selectableViewDidToggleOptions(with button: UIButton, expanded: Bool)
+    @objc optional func singleSelectableView(_ view: SingleSelectableView, didSelect option: SelectableOption)
+    @objc optional func multiSelectableView(_ view: MultiSelectableView, didSelect option: SelectableOption)
+    @objc optional func searchSelectableView(_ view: SearchSelectableView, didSelect option: SelectableOption)
+    @objc optional func selectableViewDidToggleOptions(with button: UIButton, expanded: Bool)
 }
 ```
 
-#### Additionally in Interface Builder you may set up for every `BSSelectableView` the following properties:
+#### Additionally in Interface Builder you may set up for every `SelectableView` the following properties:
 
 ```Swift
-@IBInspectable public var identifier: String = "" //to differentiate selectable views
-@IBInspectable public var tableViewAccessibilityIdentifier: String = ""
-@IBInspectable public var maxNumberOfRows: Int = 6 //while selecting rows
-@IBInspectable public var placeholder: String = ""
-@IBInspectable public var cornerRadius: CGFloat = 3 //no words needed
-```
-
-#### You may also do some customizing (*the following are default*):
-
-```Swift
-    BSSelectableView.fontForOption = UIFont.systemFontOfSize(16)
-    BSSelectableView.fontForPlaceholderText = UIFont.systemFontOfSize(14)
-
-    BSSelectableView.leftPaddingForOption = 20
-    BSSelectableView.heightForOption = 40
-    BSSelectableView.leftPaddingForPlaceholderText = 0
-
-    BSSelectableView.tintColorForSelectedOption = UIColor.blueColor()
-    BSSelectableView.titleColorForSelectedOption = UIColor.greenColor()
-    BSSelectableView.titleColorForOption = UIColor.blackColor()
-    BSSelectableView.textColorForPlaceholderText = UIColor.grayColor()
+    var fontForOption = UIFont.systemFont(ofSize: 16)
+    var fontForPlaceholderText = UIFont.systemFont(ofSize: 14)
+    
+    @IBInspectable open var leftPaddingForPlaceholderText = 0
+    @IBInspectable open var leftPaddingForOption = 20
+    @IBInspectable open var heightForOption = 40
+    
+    @IBInspectable open var titleColorForSelectedOption = UIColor.green
+    @IBInspectable open var titleColorForOption = UIColor.black
+    @IBInspectable open var textColorForPlaceholderText = UIColor.gray
+    @IBInspectable open var tintColorForSelectedOption = UIColor.blue
+    
+    @IBInspectable open var identifier = ""
+    @IBInspectable open var tableViewAccessibilityIdentifier = ""
+    @IBInspectable open var maxNumberOfRows = 6
+    @IBInspectable open var placeholder = ""
 ```
 
 #### If you need you are able to call public instance methods:
 
 ```Swift
-public func hideOptions() //collapse selectable options
+open func hideOptions() //collapse selectable options
+open func select(option: SelectableOption) //only MultiSelectableView
+open func deselect(option: SelectableOption) //only MultiSelectableView
 ```
 
 #### You have access to the following properties:
 
 ```Swift
-public var options: [BSSelectableOption]? //current list of options able to select it
-public var selectedOption: BSSelectableOption? //BSSingleSelectableView
-public var selectedOptions = [BSSelectableOption]() //BSMultiSelectableView
+open var options: [SelectableOption]? //current list of options able to select it
+open var selectedOption: SelectableOption? //SingleSelectableView, SearchSelectableView
+open var selectedOptions = [SelectableOption]() //MultiSelectableView
 ```
 
-#### `BSSelectableOption` is defined as follows:
+#### `SelectableOption` is defined as follows:
 
 ```Swift
-public class BSSelectableOption: NSObject {
+open class SelectableOption: NSObject {
     
-    public var index: Int
-    public var identifier: String
-    public var title: String
-    public var userInfo: [AnyHashable: Any]?
+    open var index: Int
+    open var identifier: String
+    open var title: String
+    open var userInfo: [AnyHashable: Any]?
     
-    public var descendantOptions = [BSSelectableOption]()
+    open var descendantOptions = [SelectableOption]()
     
     public init(index: Int, title: String, identifier: String, userInfo: [AnyHashable: Any]? = nil) {
         
@@ -143,4 +143,4 @@ Bartłomiej Semańczyk, bartekss2@icloud.com
 
 ## License
 
-`BSSelectableView` is available under the MIT license. See the LICENSE file for more info.
+`SelectableView` is available under the MIT license. See the LICENSE file for more info.

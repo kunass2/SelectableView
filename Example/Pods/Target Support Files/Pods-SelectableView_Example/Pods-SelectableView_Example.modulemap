@@ -1,0 +1,6 @@
+framework module Pods_SelectableView_Example {
+  umbrella header "Pods-SelectableView_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

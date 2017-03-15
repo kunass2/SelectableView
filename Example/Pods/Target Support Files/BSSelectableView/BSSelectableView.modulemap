@@ -1,6 +1,0 @@
-framework module BSSelectableView {
-  umbrella header "BSSelectableView-umbrella.h"
-
-  export *
-  module * { export * }
-}

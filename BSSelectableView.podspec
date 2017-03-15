@@ -9,15 +9,15 @@
 Pod::Spec.new do |s|
 
   s.name             = 'BSSelectableView'
-  s.version          = '1.5.1'
+  s.version          = '1.6'
   s.summary          = 'Easily manage your token along with your single or multiply select view.'
   s.description      = "Looking for simple Swift library to manage multiply or single selection? This one is for you:)"
 
-  s.homepage         = 'https://github.com/kunass2/BSSelectableView'
+  s.homepage         = 'https://github.com/kunass2/SelectableView'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Bartłomiej Semańczyk' => 'bartekss2@icloud.com' }
-  s.source           = { :git => 'https://github.com/kunass2/BSSelectableView.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/kunass2/SelectableView.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
-  s.source_files = 'BSSelectableView/Classes/**/*'
+  s.source_files = 'SelectableView/Classes/**/*'
 end

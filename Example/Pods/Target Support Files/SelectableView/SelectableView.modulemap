@@ -1,0 +1,6 @@
+framework module SelectableView {
+  umbrella header "SelectableView-umbrella.h"
+
+  export *
+  module * { export * }
+}
