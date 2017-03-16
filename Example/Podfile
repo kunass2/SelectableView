@@ -1,11 +1,5 @@
 use_frameworks!
 
 target 'SelectableView_Example' do
-  pod 'SelectableView', :path => '../'
-
-  target 'SelectableView_Tests' do
-    inherit! :search_paths
-
-    
-  end
+  pod 'BSSelectableView', :path => '../'
 end

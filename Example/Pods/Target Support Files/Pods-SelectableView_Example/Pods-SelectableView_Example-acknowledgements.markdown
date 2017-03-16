@@ -1,7 +1,7 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
-## SelectableView
+## BSSelectableView
 
 Copyright (c) 2017 Bartłomiej Semańczyk <bartlomiej.semanczyk@railwaymen.org>
 

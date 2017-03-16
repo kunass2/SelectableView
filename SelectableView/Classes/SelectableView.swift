@@ -36,24 +36,24 @@ open class SelectableOption: NSObject {
 
 let SelectableTableViewCellIdentifier = "SelectableTableViewCellIdentifier"
 
-open class SelectableView: UIView {
+@IBDesignable open class SelectableView: UIView {
     
     var fontForOption = UIFont.systemFont(ofSize: 16)
     var fontForPlaceholderText = UIFont.systemFont(ofSize: 14)
     
-    @IBInspectable open var leftPaddingForPlaceholderText = 0
-    @IBInspectable open var leftPaddingForOption = 20
-    @IBInspectable open var heightForOption = 40
+    @IBInspectable open var leftPaddingForPlaceholderText: Int = 0
+    @IBInspectable open var leftPaddingForOption: Int = 20
+    @IBInspectable open var heightForOption: Int = 40
     
-    @IBInspectable open var titleColorForSelectedOption = UIColor.green
-    @IBInspectable open var titleColorForOption = UIColor.black
-    @IBInspectable open var textColorForPlaceholderText = UIColor.gray
-    @IBInspectable open var tintColorForSelectedOption = UIColor.blue
+    @IBInspectable open var titleColorForSelectedOption: UIColor = UIColor.green
+    @IBInspectable open var titleColorForOption: UIColor = UIColor.black
+    @IBInspectable open var textColorForPlaceholderText: UIColor = UIColor.gray
+    @IBInspectable open var tintColorForSelectedOption: UIColor = UIColor.blue
     
-    @IBInspectable open var identifier = ""
-    @IBInspectable open var tableViewAccessibilityIdentifier = ""
-    @IBInspectable open var maxNumberOfRows = 6
-    @IBInspectable open var placeholder = "" {
+    @IBInspectable open var identifier: String = ""
+    @IBInspectable open var tableViewAccessibilityIdentifier: String = ""
+    @IBInspectable open var maxNumberOfRows: Int = 6
+    @IBInspectable open var placeholder: String = "" {
         
         didSet {
             
