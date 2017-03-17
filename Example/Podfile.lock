@@ -1,5 +1,5 @@
 PODS:
-  - BSSelectableView (1.6)
+  - BSSelectableView (1.7)
 
 DEPENDENCIES:
   - BSSelectableView (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  BSSelectableView: f86ba9d338269bbf4fc75befde94a440f4fced81
+  BSSelectableView: b63746f3c6226af2ad599f5a964f60ddf7e8062c
 
 PODFILE CHECKSUM: aae7364fc688c8a85c161dab4602f75cc19be223
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0

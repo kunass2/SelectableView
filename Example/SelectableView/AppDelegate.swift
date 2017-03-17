@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SelectableView
+import BSSelectableView
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

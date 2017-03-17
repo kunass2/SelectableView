@@ -6,7 +6,7 @@
 //
 //
 
-open class SearchSelectableView: SelectableView, UITableViewDataSource, UITableViewDelegate {
+open class SearchSelectableView: SelectableView, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     
     @IBOutlet open var textField: UITextField!
     
@@ -44,6 +44,7 @@ open class SearchSelectableView: SelectableView, UITableViewDataSource, UITableV
     open override func awakeFromNib() {
         super.awakeFromNib()
         
+        textField.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -62,7 +63,6 @@ open class SearchSelectableView: SelectableView, UITableViewDataSource, UITableV
         
         tableView.reloadData()
         expanded = true
-        updateContentOptionsHeight(for: filteredOptions)
     }
     
     //MARK: - Private
@@ -95,7 +95,16 @@ open class SearchSelectableView: SelectableView, UITableViewDataSource, UITableV
     //MARK: - UITableViewDelegate
     
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         selectedOption = filteredOptions[indexPath.row]
+    }
+    
+    //MARK: - UITextFieldDelegate
+    
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
+        expanded = true
+    }
+    
+    public func textFieldDidEndEditing(_ textField: UITextField) {
+        expanded = false
     }
 }

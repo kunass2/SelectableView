@@ -7,4 +7,4 @@
 //
 
 @import UIKit;
-@import SelectableView;
+@import BSSelectableView;

@@ -22,7 +22,72 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lea-QO-d3X" customClass="SingleSelectableView" customModule="SelectableView">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SFf-28-Wxr" customClass="SearchSelectableView" customModule="BSSelectableView">
+                                <rect key="frame" x="0.0" y="40" width="375" height="68"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MUN-UG-yEq">
+                                        <rect key="frame" x="318" y="17" width="47" height="30"/>
+                                        <state key="normal" title="Switch">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IeA-Se-eCv">
+                                        <rect key="frame" x="8" y="55" width="359" height="0.0"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" id="egA-Mb-hSt"/>
+                                        </constraints>
+                                    </view>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eYv-M8-27M">
+                                        <rect key="frame" x="8" y="8" width="302" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.61176470589999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="4wL-Y7-ZUY"/>
+                                    <constraint firstAttribute="trailing" secondItem="IeA-Se-eCv" secondAttribute="trailing" constant="8" id="Dat-Ba-81K"/>
+                                    <constraint firstItem="IeA-Se-eCv" firstAttribute="top" secondItem="MUN-UG-yEq" secondAttribute="bottom" constant="8" id="Dmm-pt-cwy"/>
+                                    <constraint firstItem="eYv-M8-27M" firstAttribute="leading" secondItem="SFf-28-Wxr" secondAttribute="leading" constant="8" id="Gyd-xj-XwZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="MUN-UG-yEq" secondAttribute="trailing" constant="10" id="OMW-ME-PjA"/>
+                                    <constraint firstItem="MUN-UG-yEq" firstAttribute="leading" secondItem="eYv-M8-27M" secondAttribute="trailing" constant="8" id="Ol1-mx-HUL"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="240" id="RNm-Yk-5US"/>
+                                    <constraint firstItem="eYv-M8-27M" firstAttribute="top" secondItem="SFf-28-Wxr" secondAttribute="top" constant="8" id="cZA-qB-nMG"/>
+                                    <constraint firstItem="IeA-Se-eCv" firstAttribute="top" secondItem="MUN-UG-yEq" secondAttribute="bottom" constant="8" id="gdN-J1-Iah"/>
+                                    <constraint firstItem="MUN-UG-yEq" firstAttribute="top" secondItem="SFf-28-Wxr" secondAttribute="top" constant="17" id="mcs-V7-d7V"/>
+                                    <constraint firstItem="IeA-Se-eCv" firstAttribute="top" secondItem="eYv-M8-27M" secondAttribute="bottom" constant="17" id="s7b-g2-u7e"/>
+                                    <constraint firstItem="IeA-Se-eCv" firstAttribute="leading" secondItem="SFf-28-Wxr" secondAttribute="leading" constant="8" id="wEF-Kf-RUY"/>
+                                    <constraint firstAttribute="bottom" secondItem="IeA-Se-eCv" secondAttribute="bottom" constant="13" id="wVq-Ek-6oM"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="&quot;hejjjjj&quot;"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="4wL-Y7-ZUY"/>
+                                        <exclude reference="RNm-Yk-5US"/>
+                                        <exclude reference="Dmm-pt-cwy"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <outlet property="contentOptionsHeightConstraint" destination="egA-Mb-hSt" id="VVC-OC-NuY"/>
+                                    <outlet property="contentOptionsView" destination="IeA-Se-eCv" id="HUN-ru-Gf1"/>
+                                    <outlet property="switchButton" destination="MUN-UG-yEq" id="Zdp-sy-S3y"/>
+                                    <outlet property="textField" destination="eYv-M8-27M" id="OAn-6N-A9x"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lea-QO-d3X" customClass="SingleSelectableView" customModule="BSSelectableView">
                                 <rect key="frame" x="0.0" y="150" width="375" height="68"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" horizontalCompressionResistancePriority="755" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x64-CI-nbG">
@@ -82,10 +147,10 @@
                                     <outlet property="switchButton" destination="x64-CI-nbG" id="tUY-N0-RGW"/>
                                 </connections>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZy-fY-Sa7" customClass="MultiSelectableView" customModule="SelectableView">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZy-fY-Sa7" customClass="MultiSelectableView" customModule="BSSelectableView">
                                 <rect key="frame" x="0.0" y="238" width="375" height="68"/>
                                 <subviews>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4UV-0G-Sjc" customClass="VerticalTokenView" customModule="SelectableView">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4UV-0G-Sjc" customClass="VerticalTokenView" customModule="BSSelectableView">
                                         <rect key="frame" x="20" y="3" width="293" height="31"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -153,7 +218,7 @@
                                     <outlet property="verticalTokenView" destination="4UV-0G-Sjc" id="EX5-jI-v4F"/>
                                 </connections>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d2n-xX-Krj" customClass="MultiSelectableView" customModule="SelectableView">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d2n-xX-Krj" customClass="MultiSelectableView" customModule="BSSelectableView">
                                 <rect key="frame" x="0.0" y="316" width="375" height="68"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PBf-f8-C7j">
@@ -169,7 +234,7 @@
                                             <constraint firstAttribute="height" id="4UQ-Q5-97O"/>
                                         </constraints>
                                     </view>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PMl-rn-ysg" customClass="HorizontalTokenView" customModule="SelectableView">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PMl-rn-ysg" customClass="HorizontalTokenView" customModule="BSSelectableView">
                                         <rect key="frame" x="21" y="8" width="274" height="34"/>
                                         <color key="backgroundColor" red="1" green="1" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </scrollView>
@@ -208,71 +273,6 @@
                                     <outlet property="contentOptionsView" destination="usG-iM-Nfg" id="P16-vU-M1R"/>
                                     <outlet property="horizontalTokenView" destination="PMl-rn-ysg" id="88c-5c-bmr"/>
                                     <outlet property="switchButton" destination="PBf-f8-C7j" id="Dlm-vX-UFF"/>
-                                </connections>
-                            </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SFf-28-Wxr" customClass="SearchSelectableView" customModule="BSSelectableView">
-                                <rect key="frame" x="0.0" y="40" width="375" height="68"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MUN-UG-yEq">
-                                        <rect key="frame" x="318" y="17" width="47" height="30"/>
-                                        <state key="normal" title="Switch">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                    </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IeA-Se-eCv">
-                                        <rect key="frame" x="8" y="55" width="359" height="0.0"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" id="egA-Mb-hSt"/>
-                                        </constraints>
-                                    </view>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eYv-M8-27M">
-                                        <rect key="frame" x="8" y="8" width="302" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                </subviews>
-                                <color key="backgroundColor" red="1" green="0.61176470589999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="4wL-Y7-ZUY"/>
-                                    <constraint firstAttribute="trailing" secondItem="IeA-Se-eCv" secondAttribute="trailing" constant="8" id="Dat-Ba-81K"/>
-                                    <constraint firstItem="IeA-Se-eCv" firstAttribute="top" secondItem="MUN-UG-yEq" secondAttribute="bottom" constant="8" id="Dmm-pt-cwy"/>
-                                    <constraint firstItem="eYv-M8-27M" firstAttribute="leading" secondItem="SFf-28-Wxr" secondAttribute="leading" constant="8" id="Gyd-xj-XwZ"/>
-                                    <constraint firstAttribute="trailing" secondItem="MUN-UG-yEq" secondAttribute="trailing" constant="10" id="OMW-ME-PjA"/>
-                                    <constraint firstItem="MUN-UG-yEq" firstAttribute="leading" secondItem="eYv-M8-27M" secondAttribute="trailing" constant="8" id="Ol1-mx-HUL"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="240" id="RNm-Yk-5US"/>
-                                    <constraint firstItem="eYv-M8-27M" firstAttribute="top" secondItem="SFf-28-Wxr" secondAttribute="top" constant="8" id="cZA-qB-nMG"/>
-                                    <constraint firstItem="IeA-Se-eCv" firstAttribute="top" secondItem="MUN-UG-yEq" secondAttribute="bottom" constant="8" id="gdN-J1-Iah"/>
-                                    <constraint firstItem="MUN-UG-yEq" firstAttribute="top" secondItem="SFf-28-Wxr" secondAttribute="top" constant="17" id="mcs-V7-d7V"/>
-                                    <constraint firstItem="IeA-Se-eCv" firstAttribute="top" secondItem="eYv-M8-27M" secondAttribute="bottom" constant="17" id="s7b-g2-u7e"/>
-                                    <constraint firstItem="IeA-Se-eCv" firstAttribute="leading" secondItem="SFf-28-Wxr" secondAttribute="leading" constant="8" id="wEF-Kf-RUY"/>
-                                    <constraint firstAttribute="bottom" secondItem="IeA-Se-eCv" secondAttribute="bottom" constant="13" id="wVq-Ek-6oM"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="15"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="&quot;hejjjjj&quot;"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="4wL-Y7-ZUY"/>
-                                        <exclude reference="RNm-Yk-5US"/>
-                                        <exclude reference="Dmm-pt-cwy"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <outlet property="contentOptionsHeightConstraint" destination="egA-Mb-hSt" id="VVC-OC-NuY"/>
-                                    <outlet property="contentOptionsView" destination="IeA-Se-eCv" id="HUN-ru-Gf1"/>
-                                    <outlet property="switchButton" destination="MUN-UG-yEq" id="Zdp-sy-S3y"/>
-                                    <outlet property="textField" destination="eYv-M8-27M" id="OAn-6N-A9x"/>
                                 </connections>
                             </view>
                         </subviews>

@@ -4,17 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>BSSelectableView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-SelectableView_Example.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-SelectableView_Tests.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>SelectableView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -22,17 +17,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>5F7019CA67670893188437196CE0FA8F</key>
+		<key>1F58EEF2E4728FA57A0C1592D481118D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E550200A2EDBA6771A449D3EC38CBABE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F30FC4063DBB49CF5BCE091FA3CFA3D6</key>
+		<key>5CA15982689B188B0DAADE0797DD93AB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
