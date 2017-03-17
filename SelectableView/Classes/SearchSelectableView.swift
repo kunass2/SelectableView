@@ -63,6 +63,10 @@ open class SearchSelectableView: SelectableView, UITableViewDataSource, UITableV
         
         tableView.reloadData()
         expanded = true
+        
+        if sender.text!.isEmpty {
+            selectedOption = nil
+        }
     }
     
     //MARK: - Private
@@ -102,6 +106,13 @@ open class SearchSelectableView: SelectableView, UITableViewDataSource, UITableV
     
     public func textFieldDidBeginEditing(_ textField: UITextField) {
         expanded = true
+    }
+    
+    public func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        
+        selectedOption = nil
+        
+        return true
     }
     
     public func textFieldDidEndEditing(_ textField: UITextField) {
