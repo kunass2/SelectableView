@@ -163,6 +163,10 @@ let SelectableTableViewCellIdentifier = "SelectableTableViewCellIdentifier"
         expanded = false
     }
     
+    open func showOptions() {
+        expanded = true
+    }
+    
     //MARK: - Internal
     
     @objc func switchButtonTapped(_ sender: UIButton) {

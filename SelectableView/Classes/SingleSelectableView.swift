@@ -10,6 +10,8 @@
     
     @IBOutlet open var selectedOptionLabel: UILabel?
     
+    @IBInspectable open var hideOnSelect: Bool = true
+    
     open var selectedOption: SelectableOption? {
         
         didSet {
@@ -102,7 +104,9 @@
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         selectedOption = sortedOptions[indexPath.row]
-        expanded = false
+        if hideOnSelect {
+            expanded = false
+        }
         delegate?.singleSelectableView?(self, didSelect: selectedOption!)
     }
 }
