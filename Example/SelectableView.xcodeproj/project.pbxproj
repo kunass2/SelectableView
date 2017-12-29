@@ -152,7 +152,7 @@
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = J8AS95NKP2;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -362,7 +362,8 @@
 				PROVISIONING_PROFILE = "14b11e8f-45d6-462d-b375-a75cf36e2228";
 				PROVISIONING_PROFILE_SPECIFIER = "Universal App Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "SelectableView-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -381,7 +382,8 @@
 				PROVISIONING_PROFILE = "b59ce0ac-f506-479f-87b1-1e6e8406bd56";
 				PROVISIONING_PROFILE_SPECIFIER = "Universal App Distribution";
 				SWIFT_OBJC_BRIDGING_HEADER = "SelectableView-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

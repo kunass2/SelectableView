@@ -34,14 +34,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		190B0470F5D732594E0C1CE404AE5817 /* Pods-SelectableView_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-SelectableView_Example.modulemap"; sourceTree = "<group>"; };
+		190B0470F5D732594E0C1CE404AE5817 /* Pods-SelectableView_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SelectableView_Example.modulemap"; sourceTree = "<group>"; };
 		2713E9371E62046CA254C704BCEA3877 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D1B3EF7938BB89E4E1555980FA7DE09 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		436ABF5E9FFA6F9D295DC184B56C4497 /* Pods-SelectableView_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SelectableView_Example-umbrella.h"; sourceTree = "<group>"; };
 		6CB27A06DD7DE4046BD9941A2B553483 /* SelectableTokenView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectableTokenView.swift; sourceTree = "<group>"; };
 		8396686EC9C7A97E7C6828419866E8D1 /* Pods-SelectableView_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SelectableView_Example-resources.sh"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		93E0D3C0A3557F6F1A0A2BB7A7ACF941 /* Pods_SelectableView_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SelectableView_Example.framework; path = "Pods-SelectableView_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93E0D3C0A3557F6F1A0A2BB7A7ACF941 /* Pods_SelectableView_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SelectableView_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		99CDE14C604904002DCCA4FCBDACBEB4 /* BSSelectableView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BSSelectableView.xcconfig; sourceTree = "<group>"; };
 		9BC58C1701267FCDD07EA266EE1AAE59 /* BSSelectableView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BSSelectableView-prefix.pch"; sourceTree = "<group>"; };
 		A6C5AF181522998D25832104044D51C7 /* BSSelectableView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BSSelectableView-dummy.m"; sourceTree = "<group>"; };
@@ -53,13 +53,13 @@
 		CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		CF844DED716E9ECC54CE4F449B3FCD81 /* SelectableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectableView.swift; sourceTree = "<group>"; };
 		D6F44A9B0C9D8BC4BBFD6280C310A0FB /* SelectableTokenScrollView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectableTokenScrollView.swift; sourceTree = "<group>"; };
-		DAFC7E1B1C61C33CC58BCDB44EFCA8B4 /* BSSelectableView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = BSSelectableView.modulemap; sourceTree = "<group>"; };
+		DAFC7E1B1C61C33CC58BCDB44EFCA8B4 /* BSSelectableView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = BSSelectableView.modulemap; sourceTree = "<group>"; };
 		E3499AB549D854272C5E2B7DB4F714AB /* Pods-SelectableView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SelectableView_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		EE4B1490F4818011011748183E056E60 /* SelectableTableViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectableTableViewCell.swift; sourceTree = "<group>"; };
 		F0E7CE0B6D904A6D0D59369DA1028B2B /* Pods-SelectableView_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SelectableView_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		F842BA16F71B0E8551B3D06AA58A0ADB /* Pods-SelectableView_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SelectableView_Example-dummy.m"; sourceTree = "<group>"; };
 		FC947F24708AA4B9D0694781FB1D57C6 /* SingleSelectableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SingleSelectableView.swift; sourceTree = "<group>"; };
-		FD75802D7DB2CF256D1E817F6D51E66C /* BSSelectableView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BSSelectableView.framework; path = BSSelectableView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD75802D7DB2CF256D1E817F6D51E66C /* BSSelectableView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BSSelectableView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE35D1077FD13BEEE3A6614EBCC67BBF /* SelectableTableViewCell.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = SelectableTableViewCell.xib; sourceTree = "<group>"; };
 		FFF149B6AEC59CB351B02E75D5ED3380 /* Pods-SelectableView_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SelectableView_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,7 +118,6 @@
 				CF844DED716E9ECC54CE4F449B3FCD81 /* SelectableView.swift */,
 				FC947F24708AA4B9D0694781FB1D57C6 /* SingleSelectableView.swift */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -146,7 +145,6 @@
 			children = (
 				5836CD488C2936611900C99F77F1D8DB /* Classes */,
 			);
-			name = SelectableView;
 			path = SelectableView;
 			sourceTree = "<group>";
 		};
@@ -268,6 +266,11 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0700;
+				TargetAttributes = {
+					1F58EEF2E4728FA57A0C1592D481118D = {
+						LastSwiftMigration = 0920;
+					};
+				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -469,7 +472,8 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -501,7 +505,8 @@
 				PRODUCT_NAME = BSSelectableView;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

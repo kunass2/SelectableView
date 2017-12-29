@@ -59,7 +59,7 @@ open class SearchSelectableView: SelectableView, UITableViewDataSource, UITableV
     
     //MARK: - Internal
     
-    func textFieldDidChange(_ sender: UITextField) {
+    @objc func textFieldDidChange(_ sender: UITextField) {
         
         tableView.reloadData()
         expanded = true
