@@ -363,7 +363,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "Universal App Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "SelectableView-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -383,7 +383,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "Universal App Distribution";
 				SWIFT_OBJC_BRIDGING_HEADER = "SelectableView-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
