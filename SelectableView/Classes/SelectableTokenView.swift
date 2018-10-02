@@ -40,7 +40,7 @@ open class VerticalTokenView: UIControl {
                 
                 if let tokenView = selectableView?.tokenView(for: options[index]) {
                     
-                    tokenView.autoresizingMask = UIViewAutoresizing()
+                    tokenView.autoresizingMask = UIView.AutoresizingMask()
                     addSubview(tokenView)
                     tokenViews.append(tokenView)
                 }
